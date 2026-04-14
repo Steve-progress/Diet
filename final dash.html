@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Steven T. — Medical Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Exo+2:wght@300;400;500;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#0a0e1a;--bg2:#0f1528;--bg3:#141c32;--card:#111827;--card2:#1a2340;
+    --border:#1e2d4a;--border2:#2a3f62;
+    --teal:#00d4aa;--cyan:#00b8d4;--blue:#3b82f6;
+    --amber:#f59e0b;--red:#ef4444;--green:#22c55e;--orange:#f97316;--purple:#a855f7;
+    --text:#e2e8f0;--text2:#94a3b8;--text3:#64748b;
+    --fh:'Rajdhani',sans-serif;--fb:'Exo 2',sans-serif;--fm:'Share Tech Mono',monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--bg);color:var(--text);font-family:var(--fb);min-height:100vh;overflow-x:hidden;}
+  body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,212,170,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,170,.03) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0;}
+  .wrap{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:0 20px 60px;}
+  header{display:flex;align-items:center;justify-content:space-between;padding:24px 0 20px;border-bottom:1px solid var(--border);margin-bottom:28px;flex-wrap:wrap;gap:16px;}
+  .logo-box{width:40px;height:40px;border:1.5px solid var(--teal);display:flex;align-items:center;justify-content:center;font-family:var(--fm);font-size:11px;color:var(--teal);letter-spacing:1px;}
+  .brand-name{font-family:var(--fh);font-size:13px;font-weight:600;color:var(--text2);letter-spacing:3px;text-transform:uppercase;}
+  .pulse-dot{width:8px;height:8px;border-radius:50%;background:var(--green);animation:pulse 2s ease-in-out infinite;}
+  @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+  .status-text{font-family:var(--fm);font-size:11px;color:var(--green);letter-spacing:1px;}
+  .tabs{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:28px;}
+  .tab{font-family:var(--fh);font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;padding:8px 14px;cursor:pointer;border:1px solid var(--border2);background:transparent;color:var(--text3);transition:all .2s;position:relative;}
+  .tab::before{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--teal);transform:scaleX(0);transition:transform .2s;}
+  .tab:hover{color:var(--text2);background:rgba(0,212,170,.04);}
+  .tab.active{color:var(--teal);border-color:var(--teal);background:rgba(0,212,170,.08);}
+  .tab.active::before{transform:scaleX(1);}
+  .section{display:none;}.section.active{display:block;}
+  .section-title{font-family:var(--fh);font-size:22px;font-weight:700;color:var(--text);letter-spacing:2px;text-transform:uppercase;margin-bottom:20px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+  .section-title::after{content:'';flex:1;min-width:20px;height:1px;background:linear-gradient(to right,var(--border2),transparent);}
+  .tag{font-family:var(--fm);font-size:10px;padding:3px 8px;letter-spacing:1px;white-space:nowrap;}
+  .tag-teal{background:rgba(0,212,170,.12);color:var(--teal);border:1px solid rgba(0,212,170,.3);}
+  .tag-red{background:rgba(239,68,68,.12);color:var(--red);border:1px solid rgba(239,68,68,.3);}
+  .tag-green{background:rgba(34,197,94,.12);color:var(--green);border:1px solid rgba(34,197,94,.3);}
+  .tag-amber{background:rgba(245,158,11,.12);color:var(--amber);border:1px solid rgba(245,158,11,.3);}
+  .tag-blue{background:rgba(59,130,246,.12);color:var(--blue);border:1px solid rgba(59,130,246,.3);}
+  .tag-purple{background:rgba(168,85,247,.12);color:var(--purple);border:1px solid rgba(168,85,247,.3);}
+  .card{background:var(--card);border:1px solid var(--border);padding:20px 24px;margin-bottom:16px;}
+  .card-title{font-family:var(--fh);font-size:13px;font-weight:600;color:var(--teal);letter-spacing:2px;text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+  .card-title span{color:var(--text3);font-weight:400;}
+
+  /* PROFILE */
+  .profile-grid{display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:start;}
+  @media(max-width:600px){.profile-grid{grid-template-columns:1fr;}}
+  .avatar-box{width:110px;height:110px;border:2px solid var(--teal);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:4px;position:relative;flex-shrink:0;}
+  .avatar-box::before,.avatar-box::after{content:'';position:absolute;width:12px;height:12px;border-color:var(--teal);border-style:solid;}
+  .avatar-box::before{top:-4px;left:-4px;border-width:2px 0 0 2px;}
+  .avatar-box::after{bottom:-4px;right:-4px;border-width:0 2px 2px 0;}
+  .avatar-initials{font-family:var(--fh);font-size:32px;font-weight:700;color:var(--teal);}
+  .profile-name{font-family:var(--fh);font-size:30px;font-weight:700;color:var(--text);letter-spacing:2px;text-transform:uppercase;line-height:1.1;}
+  .profile-sub{font-family:var(--fm);font-size:11px;color:var(--text3);letter-spacing:1px;margin-top:4px;}
+  .profile-stats{display:flex;gap:20px;margin-top:16px;flex-wrap:wrap;}
+  .stat-item{display:flex;flex-direction:column;gap:2px;}
+  .stat-lbl{font-family:var(--fm);font-size:9px;color:var(--text3);letter-spacing:2px;text-transform:uppercase;}
+  .stat-val{font-family:var(--fh);font-size:20px;font-weight:600;color:var(--text);}
+  .stat-u{font-size:11px;color:var(--text3);margin-left:2px;}
+  .info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:16px;}
+  .info-item{background:var(--bg3);border:1px solid var(--border);padding:12px 16px;}
+  .info-lbl{font-family:var(--fm);font-size:9px;color:var(--text3);letter-spacing:2px;margin-bottom:4px;}
+  .info-val{font-size:14px;color:var(--text);font-weight:500;}
+  .cbadge{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border:1px solid;font-family:var(--fm);font-size:11px;letter-spacing:1px;margin:4px 4px 0 0;}
+  .c-epi{border-color:var(--red);color:var(--red);background:rgba(239,68,68,.08);}
+  .c-uw{border-color:var(--orange);color:var(--orange);background:rgba(249,115,22,.08);}
+
+  /* LAB */
+  .lab-date-badge{display:inline-block;font-family:var(--fm);font-size:10px;padding:3px 10px;background:rgba(0,184,212,.1);border:1px solid rgba(0,184,212,.3);color:var(--cyan);margin-bottom:12px;}
+  .lab-st{font-family:var(--fh);font-size:12px;font-weight:600;color:var(--cyan);letter-spacing:3px;text-transform:uppercase;padding:8px 0;border-bottom:1px solid var(--border);margin-bottom:10px;margin-top:18px;}
+  .lt{width:100%;border-collapse:collapse;}
+  .lt tr{border-bottom:1px solid var(--border);}
+  .lt tr:last-child{border-bottom:none;}
+  .lt td{padding:8px 6px;font-size:13px;vertical-align:middle;}
+  .lt td:first-child{color:var(--text2);width:55%;}
+  .lt td:nth-child(2){font-family:var(--fm);font-size:12px;font-weight:500;text-align:right;}
+  .lt td:last-child{font-family:var(--fm);font-size:10px;color:var(--text3);text-align:right;width:30%;}
+  .vn{color:var(--green);}.vh{color:var(--red);}.vl{color:var(--amber);}.vw{color:var(--orange);}
+  .anote{background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.2);border-left:3px solid var(--red);padding:12px 16px;margin-top:16px;font-size:13px;color:var(--text2);}
+  .anote strong{color:var(--red);font-family:var(--fh);letter-spacing:1px;}
+  .anote-amber{background:rgba(245,158,11,.05);border-color:rgba(245,158,11,.2);border-left-color:var(--amber);}
+  .anote-amber strong{color:var(--amber);}
+
+  /* MEDS */
+  .med-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  @media(max-width:650px){.med-grid{grid-template-columns:1fr;}}
+  .med-col-title{font-family:var(--fh);font-size:14px;font-weight:600;color:var(--cyan);letter-spacing:2px;text-transform:uppercase;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--border2);}
+  .med-item{display:flex;align-items:flex-start;gap:12px;padding:12px 0;border-bottom:1px solid var(--border);}
+  .med-item:last-child{border-bottom:none;}
+  .med-icon{width:32px;height:32px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:11px;border:1px solid;font-family:var(--fm);}
+  .mi-rx{border-color:rgba(59,130,246,.4);background:rgba(59,130,246,.08);color:var(--blue);}
+  .mi-vit{border-color:rgba(34,197,94,.4);background:rgba(34,197,94,.08);color:var(--green);}
+  .med-name{font-family:var(--fh);font-size:15px;font-weight:600;color:var(--text);}
+  .med-dose{font-family:var(--fm);font-size:11px;color:var(--teal);margin-top:2px;}
+  .med-note{font-size:11px;color:var(--text3);margin-top:3px;line-height:1.4;}
+  .med-dr{font-family:var(--fm);font-size:10px;color:var(--purple);margin-top:3px;}
+
+  /* HOSPITALIZATION */
+  .hosp-entry{background:var(--card);border:1px solid var(--border);margin-bottom:16px;}
+  .hosp-hdr{padding:14px 18px;cursor:pointer;display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+  .hosp-hdr:hover{background:rgba(255,255,255,.02);}
+  .hosp-date{font-family:var(--fh);font-size:16px;font-weight:700;color:var(--text);letter-spacing:1px;}
+  .hosp-reason{font-size:13px;color:var(--text3);flex:1;}
+  .hosp-body{padding:18px 22px;display:none;border-top:1px solid var(--border);}
+  .hosp-body.open{display:block;}
+  .hosp-sec{margin-bottom:16px;}
+  .hosp-sec-lbl{font-family:var(--fm);font-size:9px;color:var(--cyan);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;border-bottom:1px solid var(--border);padding-bottom:4px;}
+  .fi{padding:6px 0 6px 12px;border-left:2px solid var(--border2);font-size:13px;color:var(--text2);margin-bottom:4px;line-height:1.5;}
+  .fi-flag{border-left-color:var(--amber);color:var(--text);}
+  .fi-ok{border-left-color:var(--green);}
+  .med-pills{display:flex;flex-wrap:wrap;gap:6px;}
+  .mpill{font-family:var(--fm);font-size:11px;padding:4px 10px;background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.25);color:var(--blue);}
+  .scan-item{background:var(--bg3);border:1px solid var(--border);padding:10px 14px;margin-bottom:6px;font-size:13px;color:var(--text2);line-height:1.6;}
+  .scan-item strong{color:var(--text);font-family:var(--fh);}
+  .btable{width:100%;border-collapse:collapse;font-size:12px;}
+  .btable th{font-family:var(--fm);font-size:9px;letter-spacing:1px;color:var(--text3);padding:6px 8px;border-bottom:1px solid var(--border);text-align:left;}
+  .btable td{padding:5px 8px;border-bottom:1px solid rgba(30,45,74,.5);color:var(--text2);font-family:var(--fm);}
+  .btable tr:last-child td{border-bottom:none;}
+
+  /* EPILEPSY */
+  .seizure-timeline{position:relative;padding-left:24px;}
+  .seizure-timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:1px;background:var(--border2);}
+  .sz-entry{position:relative;margin-bottom:24px;background:var(--card);border:1px solid var(--border);padding:16px 20px;}
+  .sz-entry::before{content:'';position:absolute;left:-28px;top:20px;width:10px;height:10px;border-radius:50%;background:var(--red);border:2px solid var(--bg);box-shadow:0 0 0 3px rgba(239,68,68,.2);}
+  .sz-date{font-family:var(--fh);font-size:18px;font-weight:700;color:var(--text);letter-spacing:1px;}
+  .sz-lbl{font-family:var(--fm);font-size:10px;color:var(--red);letter-spacing:2px;margin-top:4px;}
+  .sz-note{font-size:12px;color:var(--text3);margin-top:8px;line-height:1.7;}
+  .sz-note span{color:var(--amber);font-weight:500;}
+  .stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:24px;}
+  .sc{background:var(--card);border:1px solid var(--border);padding:16px;text-align:center;}
+  .sc-val{font-family:var(--fh);font-size:28px;font-weight:700;}
+  .sc-lbl{font-family:var(--fm);font-size:9px;color:var(--text3);letter-spacing:2px;margin-top:4px;}
+
+  /* DIET */
+  .month-hdr{font-family:var(--fh);font-size:16px;font-weight:700;color:var(--amber);letter-spacing:3px;text-transform:uppercase;padding:10px 16px;background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.2);margin-bottom:1px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;user-select:none;}
+  .month-hdr:hover{background:rgba(245,158,11,.1);}
+  .month-body{display:none;}.month-body.open{display:block;}
+  .day-card{background:var(--card);border:1px solid var(--border);border-top:none;margin-bottom:1px;}
+  .day-card:first-child{border-top:1px solid var(--border);}
+  .day-hdr{padding:9px 14px;cursor:pointer;display:flex;align-items:center;gap:10px;}
+  .day-hdr:hover{background:rgba(255,255,255,.02);}
+  .day-date-lbl{font-family:var(--fh);font-size:13px;font-weight:600;color:var(--teal);letter-spacing:1px;min-width:70px;}
+  .day-summary{font-size:11px;color:var(--text3);flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+  .bm-ok{font-family:var(--fm);font-size:9px;padding:2px 7px;background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.3);color:var(--blue);white-space:nowrap;}
+  .bm-no{font-family:var(--fm);font-size:9px;padding:2px 7px;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2);color:var(--red);white-space:nowrap;}
+  .bm-miss{font-family:var(--fm);font-size:9px;padding:2px 7px;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2);color:var(--amber);white-space:nowrap;}
+  .chevron{font-size:12px;color:var(--text3);transition:transform .2s;flex-shrink:0;}
+  .chevron.open{transform:rotate(180deg);}
+  .day-body{display:none;padding:0 14px 12px 14px;}.day-body.open{display:block;}
+  .meal-entry{padding:8px 0;border-bottom:1px solid rgba(30,45,74,.6);display:flex;gap:10px;}
+  .meal-entry:last-child{border-bottom:none;}
+  .meal-icon-col{width:18px;font-size:13px;text-align:center;flex-shrink:0;padding-top:2px;}
+  .meal-time-col{width:60px;flex-shrink:0;font-family:var(--fm);font-size:10px;color:var(--teal);padding-top:2px;}
+  .meal-content{flex:1;}
+  .meal-str{font-size:13px;color:var(--text);}
+  .meds-row{margin-top:5px;display:flex;flex-wrap:wrap;gap:4px;align-items:center;}
+  .mp{font-family:var(--fm);font-size:10px;padding:2px 8px;background:rgba(59,130,246,.07);border:1px solid rgba(59,130,246,.2);color:var(--blue);}
+  .mt{font-family:var(--fm);font-size:9px;color:var(--text3);}
+  .no-med{font-family:var(--fm);font-size:10px;color:rgba(239,68,68,.7);padding:2px 8px;background:rgba(239,68,68,.05);border:1px solid rgba(239,68,68,.15);}
+  .miss-pill{font-family:var(--fm);font-size:10px;color:var(--orange);padding:2px 8px;background:rgba(249,115,22,.06);border:1px solid rgba(249,115,22,.2);}
+
+  footer{border-top:1px solid var(--border);padding-top:20px;margin-top:40px;text-align:center;}
+  footer p{font-family:var(--fm);font-size:10px;color:var(--text3);letter-spacing:2px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <div class="logo-box">MED</div>
+    <div class="brand-name">Patient Dashboard</div>
+  </div>
+  <div style="display:flex;align-items:center;gap:8px;">
+    <div class="pulse-dot"></div>
+    <div class="status-text">ACTIVE MONITORING</div>
+  </div>
+</header>
+
+<div class="tabs">
+  <div class="tab active" onclick="showTab('profile',this)">Profile</div>
+  <div class="tab" onclick="showTab('lab',this)">Lab Results</div>
+  <div class="tab" onclick="showTab('meds',this)">Medications</div>
+  <div class="tab" onclick="showTab('hosp',this)">Hospitalizations</div>
+  <div class="tab" onclick="showTab('journal',this)">Epilepsy Journal</div>
+  <div class="tab" onclick="showTab('diet',this)">Diet Tracker</div>
+</div>
+
+<!-- ========== PROFILE ========== -->
+<div id="sec-profile" class="section active">
+  <div class="section-title">Patient Profile <span class="tag tag-teal">Steven Haroution Tchakerian</span></div>
+  <div class="card">
+    <div class="profile-grid">
+      <div class="avatar-box">
+        <div class="avatar-initials">ST</div>
+      </div>
+      <div>
+        <div class="profile-name">Steven Tchakerian</div>
+        <div class="profile-sub">HAROUTION · MALE · DOB 18/02/2003</div>
+        <div class="profile-stats">
+          <div class="stat-item"><div class="stat-lbl">Age</div><div class="stat-val">23<span class="stat-u">yrs</span></div></div>
+          <div class="stat-item"><div class="stat-lbl">Weight</div><div class="stat-val">58<span class="stat-u">kg</span></div></div>
+          <div class="stat-item"><div class="stat-lbl">Height</div><div class="stat-val">175.5<span class="stat-u">cm</span></div></div>
+          <div class="stat-item"><div class="stat-lbl">BMI</div><div class="stat-val" style="color:var(--orange)">18.8<span class="stat-u"> ↓</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="info-grid">
+    <div class="info-item"><div class="info-lbl">Date of Birth</div><div class="info-val">18 February 2003</div></div>
+    <div class="info-item"><div class="info-lbl">Dossier No.</div><div class="info-val">DM021051</div></div>
+    <div class="info-item"><div class="info-lbl">General Physician</div><div class="info-val">Dr. Jacques Ghorayeb</div></div>
+    <div class="info-item"><div class="info-lbl">Attending Neurologist</div><div class="info-val">Dr. Hakim Philippe Michel</div></div>
+    <div class="info-item"><div class="info-lbl">Dietitian</div><div class="info-val" style="color:var(--teal)">Jessica R. Attallah</div></div>
+    <div class="info-item"><div class="info-lbl">Dietitian Visit</div><div class="info-val" style="color:var(--amber)">25 April 2026</div></div>
+    <div class="info-item"><div class="info-lbl">Primary Goal</div><div class="info-val">Weight Gain · Seizure Control</div></div>
+    <div class="info-item"><div class="info-lbl">Last Seizure</div><div class="info-val" style="color:var(--red)">19 February 2026</div></div>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <div class="card-title">Active Diagnoses</div>
+    <span class="cbadge c-epi">⚡ Epilepsy</span>
+    <span class="cbadge c-uw">⚠ Underweight — BMI 18.8</span>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Care Team</div>
+    <div style="font-size:13px;color:var(--text2);line-height:2.3;">
+      <div><span style="color:var(--text3);font-family:var(--fm);font-size:10px;display:inline-block;width:160px;">GENERAL PHYSICIAN</span>Dr. Jacques Ghorayeb</div>
+      <div><span style="color:var(--text3);font-family:var(--fm);font-size:10px;display:inline-block;width:160px;">NEUROLOGIST</span>Dr. Hakim Philippe Michel</div>
+      <div><span style="color:var(--text3);font-family:var(--fm);font-size:10px;display:inline-block;width:160px;">DIETITIAN</span>Jessica R. Attallah &nbsp;<span style="color:var(--amber);font-family:var(--fm);font-size:10px;">→ Visit 25 April 2026</span></div>
+      <div><span style="color:var(--text3);font-family:var(--fm);font-size:10px;display:inline-block;width:160px;">LAB CHIEF</span>Dr. Raymond Elias Rohban · A.M. 9077/2001</div>
+      <div><span style="color:var(--text3);font-family:var(--fm);font-size:10px;display:inline-block;width:160px;">BIOCHEMIST</span>Dr. Tarek Michel Bou Assi</div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== LAB ========== -->
+<div id="sec-lab" class="section">
+  <div class="section-title">Lab Results <span class="tag tag-teal">2 REPORTS</span></div>
+
+  <div class="card">
+    <div class="lab-date-badge">REPORT #1 · 20 FEBRUARY 2026 · URGENCES</div>
+    <div style="font-family:var(--fm);font-size:10px;color:var(--text3);margin-bottom:12px;">Dr. Raymond Elias Rohban · Dr. Tarek Michel Bou Assi · Analyse AL26012074 · Chambre 0143</div>
+
+    <div class="lab-st">HÉMATOLOGIE — HÉMOGRAMME</div>
+    <table class="lt">
+      <tr><td>Globules rouges (RBC)</td><td class="vn">5,120,000 /mm³</td><td>4,500,000 – 6,200,000</td></tr>
+      <tr><td>Hémoglobine</td><td class="vn">15.5 g/dl</td><td>13.0 – 17.7</td></tr>
+      <tr><td>Hématocrite</td><td class="vn">46.0 %</td><td>40 – 54</td></tr>
+      <tr><td>VGM</td><td class="vn">89.84 fl</td><td>80 – 100</td></tr>
+      <tr><td>TCMH</td><td class="vn">30.3 pg</td><td>≥ 26.5</td></tr>
+      <tr><td>CCMH</td><td class="vn">33.7 %</td><td>32 – 36</td></tr>
+      <tr><td>IDE</td><td class="vn">13.0 %</td><td>12 – 15</td></tr>
+    </table>
+    <div class="lab-st">GLOBULES BLANCS</div>
+    <table class="lt">
+      <tr><td>Globules blancs (WBC)</td><td class="vh">13,600 /mm³ ⬆</td><td>4,000 – 10,000</td></tr>
+      <tr><td>P. Neutrophiles</td><td class="vh">87.0% · 11,832 /mm³ ⬆</td><td>2,000 – 7,500</td></tr>
+      <tr><td>P. Éosinophiles</td><td class="vn">0.0% · 0 /mm³</td><td>40 – 700</td></tr>
+      <tr><td>P. Basophiles</td><td class="vn">0.3% · 40.8 /mm³</td><td>0 – 200</td></tr>
+      <tr><td>Lymphocytes</td><td class="vn">9.4% · 1,278 /mm³</td><td>1,000 – 4,000</td></tr>
+      <tr><td>Monocytes</td><td class="vn">3.3% · 448.8 /mm³</td><td>200 – 1,000</td></tr>
+    </table>
+    <div class="lab-st">PLAQUETTES &amp; BIOCHIMIE</div>
+    <table class="lt">
+      <tr><td>Plaquettes</td><td class="vn">255,000 /mm³</td><td>150,000 – 500,000</td></tr>
+      <tr><td>VPM</td><td class="vn">8.8 fl</td><td>6 – 12</td></tr>
+      <tr><td>Créatinine</td><td class="vn">0.887 mg/dl · 78.50 µmol/l</td><td>0.70 – 1.20</td></tr>
+      <tr><td>TGP (ALAT)</td><td class="vn">30.7 UI/l</td><td>&lt; 42</td></tr>
+      <tr><td>Gamma GT</td><td class="vn">10.5 UI/l</td><td>&lt; 43</td></tr>
+      <tr><td>Lipase</td><td class="vn">10.6 UI/l</td><td>&lt; 60</td></tr>
+      <tr><td>Sodium</td><td class="vn">140.8 mmol/l</td><td>135 – 145</td></tr>
+      <tr><td>Potassium</td><td class="vn">4.64 mmol/l</td><td>3.5 – 5.1</td></tr>
+      <tr><td>Chlore</td><td class="vn">95.2 mmol/l</td><td>92 – 106</td></tr>
+      <tr><td>Réserve alcaline</td><td class="vn">23.3 mmol/l</td><td>22 – 29</td></tr>
+      <tr><td>CRP</td><td class="vw">1.11 mg/l</td><td>&lt; 3</td></tr>
+    </table>
+    <div class="anote">
+      <strong>⬆ ELEVATED FLAGS</strong><br>
+      <span style="display:block;margin-top:6px;line-height:1.7;">WBC at <strong style="color:var(--red)">13,600 /mm³</strong> and Neutrophils at <strong style="color:var(--red)">11,832 /mm³</strong> — elevated above normal range, consistent with post-seizure stress response or concurrent infection. All other values within normal limits.</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="lab-date-badge">REPORT #2 · 10 JUNE 2025 · ST. MARC MEDICAL CENTER</div>
+    <div style="font-family:var(--fm);font-size:10px;color:var(--text3);margin-bottom:12px;">Dr. Eddie Racoubian – Laboratory Medicine AUB · ISO Certified · N° QUAL/2006/26137 · Case 1-25-27270</div>
+
+    <div class="lab-st">HEMATOLOGY — CBC</div>
+    <table class="lt">
+      <tr><td>WBC</td><td class="vn">4.5 k/cumm</td><td>4 – 10 thousand</td></tr>
+      <tr><td>RBC</td><td class="vn">4.8 m/cumm</td><td>4 – 6.2 million</td></tr>
+      <tr><td>Hemoglobin</td><td class="vn">14.7 g%</td><td>13.5 – 17.5</td></tr>
+      <tr><td>Hematocrit</td><td class="vn">42.8 %</td><td>38.8 – 50</td></tr>
+      <tr><td>MCV</td><td class="vn">89.2 cu micron</td><td>80 – 100</td></tr>
+      <tr><td>MCH</td><td class="vn">30.6 pg</td><td>26 – 34</td></tr>
+      <tr><td>MCHC</td><td class="vn">34.3 g/dl</td><td>31 – 35</td></tr>
+      <tr><td>RDW</td><td class="vn">13.3 %</td><td>10 – 20</td></tr>
+      <tr><td>Neutrophils</td><td class="vl">41.9% ⬇</td><td>50 – 80</td></tr>
+      <tr><td>Eosinophils</td><td class="vn">1.5 %</td><td>0 – 5</td></tr>
+      <tr><td>Basophils</td><td class="vn">1.2 %</td><td>0 – 2</td></tr>
+      <tr><td>Lymphocytes</td><td class="vh">51.1% ⬆</td><td>25 – 50</td></tr>
+      <tr><td>Monocytes</td><td class="vn">4.3 %</td><td>2 – 8</td></tr>
+      <tr><td>Immatures</td><td class="vn">0 %</td><td>Zero</td></tr>
+      <tr><td>Platelets</td><td class="vn">233 k/cumm</td><td>150 – 400 thousand</td></tr>
+    </table>
+    <div class="lab-st">BIOCHEMISTRY, ELECTROLYTES &amp; SEROLOGY</div>
+    <table class="lt">
+      <tr><td>Urea</td><td class="vn">24 mg%</td><td>10 – 50</td></tr>
+      <tr><td>Creatinine</td><td class="vn">0.9 mg/dl</td><td>&lt; 1.4</td></tr>
+      <tr><td>Ferritin</td><td class="vn">74 ng/ml</td><td>30 – 400 (adult male)</td></tr>
+      <tr><td>Sodium</td><td class="vn">148 mmol/l</td><td>136 – 150</td></tr>
+      <tr><td>Potassium</td><td class="vn">5.3 mmol/l</td><td>3.8 – 5.5</td></tr>
+      <tr><td>Chloride</td><td class="vn">106 mmol/l</td><td>98 – 110</td></tr>
+      <tr><td>CO2 / Reserve Alk.</td><td class="vn">22 mmol/l</td><td>22 – 29</td></tr>
+      <tr><td>SGOT (AST)</td><td class="vn">19 U/L</td><td>&lt; 41 males</td></tr>
+      <tr><td>SGPT (ALT)</td><td class="vn">26 U/L</td><td>&lt; 37 males</td></tr>
+      <tr><td>CRP</td><td class="vn">5 mg/L</td><td>&lt; 10</td></tr>
+    </table>
+    <div class="anote anote-amber">
+      <strong>△ MILD FLAGS — JUNE 2025</strong><br>
+      <span style="display:block;margin-top:6px;line-height:1.7;">Neutrophils slightly low at <strong style="color:var(--amber)">41.9%</strong> (normal ≥50%). Lymphocytes mildly elevated at <strong style="color:var(--amber)">51.1%</strong> — may suggest a recently resolved viral infection. Interesting contrast with February 2026 report where neutrophils were critically elevated — opposite immune pattern 8 months apart. All other values normal.</span>
+    </div>
+  </div>
+</div>
+
+<!-- ========== MEDICATIONS ========== -->
+<div id="sec-meds" class="section">
+  <div class="section-title">Medications <span class="tag tag-blue">2 CATEGORIES</span></div>
+  <div class="med-grid">
+    <div class="card">
+      <div class="med-col-title">Rx Prescriptions</div>
+      <div class="med-item">
+        <div class="med-icon mi-rx">Rx</div>
+        <div>
+          <div class="med-name">Depakine Chrono 500mg</div>
+          <div class="med-dose">Morning &amp; Night</div>
+          <div class="med-note">Sodium valproate — primary anti-epileptic. Core seizure control.</div>
+          <div class="med-dr">Dr. Hakim Philippe Michel</div>
+        </div>
+      </div>
+      <div class="med-item">
+        <div class="med-icon mi-rx">Rx</div>
+        <div>
+          <div class="med-name">Gastrimut</div>
+          <div class="med-dose">1 tab · As needed (before meals)</div>
+          <div class="med-note">Anti-nausea / gastric protectant. Given if stomach issues present.</div>
+          <div class="med-dr">Dr. Adel El Hikri (if needed)</div>
+        </div>
+      </div>
+      <div class="med-item">
+        <div class="med-icon mi-rx">Rx</div>
+        <div>
+          <div class="med-name">Cinitrex</div>
+          <div class="med-dose">1 tab · As needed</div>
+          <div class="med-note">Anti-emetic — prevents vomiting alongside Gastrimut.</div>
+          <div class="med-dr">Dr. Adel El Hikri (if needed)</div>
+        </div>
+      </div>
+      <div class="med-item">
+        <div class="med-icon mi-rx">Rx</div>
+        <div>
+          <div class="med-name">Normix</div>
+          <div class="med-dose">2 tabs · As directed</div>
+          <div class="med-note">Rifaximin — gut flora management, anti-bloating.</div>
+          <div class="med-dr">Dr. Adel El Hikri (if needed)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="med-col-title">Vitamins &amp; Supplements</div>
+      <div class="med-item">
+        <div class="med-icon mi-vit">B</div>
+        <div>
+          <div class="med-name">Vitanor B1/B6/B12</div>
+          <div class="med-dose">1 tab · As directed</div>
+          <div class="med-note">B-complex — appetite stimulation &amp; neurological support.</div>
+          <div class="med-dr">Dr. Adel El Hikri</div>
+        </div>
+      </div>
+      <div class="med-item">
+        <div class="med-icon mi-vit">D₃</div>
+        <div>
+          <div class="med-name">Benta D3 10,000 IU</div>
+          <div class="med-dose">1 tab · Daily</div>
+          <div class="med-note">High-dose D3 for deficiency correction &amp; immune support.</div>
+        </div>
+      </div>
+      <div class="med-item">
+        <div class="med-icon mi-vit">Ω3</div>
+        <div>
+          <div class="med-name">Omega-3 (EPA &amp; DHA)</div>
+          <div class="med-dose">1 tab · Daily</div>
+          <div class="med-note">Brain health and inflammation reduction.</div>
+        </div>
+      </div>
+      <div class="med-item">
+        <div class="med-icon mi-vit">Mg</div>
+        <div>
+          <div class="med-name">Magnesium</div>
+          <div class="med-dose">1 tab · Daily</div>
+          <div class="med-note">Neurological support &amp; seizure threshold regulation.</div>
+        </div>
+      </div>
+      <div class="med-item">
+        <div class="med-icon mi-vit">MV</div>
+        <div>
+          <div class="med-name">Ryvax Multivitamins</div>
+          <div class="med-dose">As directed · ✦ New</div>
+          <div class="med-note">Complete multivitamin &amp; minerals — recently added.</div>
+        </div>
+      </div>
+      <div class="med-item">
+        <div class="med-icon mi-vit">C</div>
+        <div>
+          <div class="med-name">Vitamin C</div>
+          <div class="med-dose">1 tab · As directed</div>
+          <div class="med-note">Immune support and antioxidant.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== HOSPITALIZATIONS ========== -->
+<div id="sec-hosp" class="section">
+  <div class="section-title">Hospitalizations <span class="tag tag-red">2 EVENTS</span></div>
+
+  <div class="hosp-entry">
+    <div class="hosp-hdr" onclick="toggleHosp('h1')">
+      <span class="tag tag-amber">16 DEC 2025</span>
+      <span class="hosp-date">Left Shoulder Dislocation</span>
+      <span class="hosp-reason">Arm dislocated while lifting suitcase — ER reduction</span>
+      <span class="tag tag-green">RESOLVED</span>
+      <span class="chevron" id="chev-h1">▾</span>
+    </div>
+    <div class="hosp-body" id="body-h1">
+      <div class="hosp-sec">
+        <div class="hosp-sec-lbl">Incident</div>
+        <div class="fi fi-flag">Left arm dislocated (antero-inferior luxation) while lifting a heavy suitcase. Taken to emergency for closed reduction under Dr. Iskandar Abou.</div>
+      </div>
+      <div class="hosp-sec">
+        <div class="hosp-sec-lbl">X-Ray Findings — Épaule Gauche · Dr. Iskandar Abou</div>
+        <div class="fi fi-flag">Luxation antéro-inférieure de la tête humérale gauche (antero-inferior luxation of the left humeral head)</div>
+        <div class="fi fi-ok">No bone fracture detectable (note: sub-optimal image quality)</div>
+        <div class="fi">Clous métalliques au niveau de la glène — metal anchors at glenoid level (pre-existing)</div>
+        <div class="fi fi-ok">No pulmonary infectious focus</div>
+      </div>
+      <div class="hosp-sec">
+        <div class="hosp-sec-lbl">Post-Reduction Control (Face &amp; Profil de Lamy)</div>
+        <div class="fi fi-ok">Satisfactory post-reduction result — Tête humérale en place (humeral head back in place)</div>
+      </div>
+      <div class="hosp-sec">
+        <div class="hosp-sec-lbl">Outcome</div>
+        <div class="fi fi-ok" style="color:var(--green)">Shoulder successfully reduced. Patient discharged in stable condition.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hosp-entry">
+    <div class="hosp-hdr" onclick="toggleHosp('h2')">
+      <span class="tag tag-red">19–20 FEB 2026</span>
+      <span class="hosp-date">Seizure + Vomiting Episode</span>
+      <span class="hosp-reason">Post-seizure vomiting, ER admission, CT scan &amp; IV treatment</span>
+      <span class="tag tag-green">TREATED</span>
+      <span class="chevron" id="chev-h2">▾</span>
+    </div>
+    <div class="hosp-body" id="body-h2">
+      <div class="hosp-sec">
+        <div class="hosp-sec-lbl">Incident</div>
+        <div class="fi fi-flag">Steven had a seizure on 19 February 2026. Post-seizure, he began persistent vomiting at home. Light foods (yogurt) were attempted but rejected. Admitted to Urgences at 01:21 AM on 20/02/2026. No. Admission: UR00306955.</div>
+      </div>
+      <div class="hosp-sec">
+        <div class="hosp-sec-lbl">Abdominal &amp; Pelvic CT Scan — Dr. Dalia Sarraf · Analyse AR26007171</div>
+        <div class="scan-item"><strong>Liver:</strong> Normal size. Slightly homogeneous steatotic density. Afferent and efferent vessels patent. No bile duct dilation, no gallbladder distension.</div>
+        <div class="scan-item"><strong>Pancreas / Spleen / Kidneys / Adrenals:</strong> No abnormality. Normal size and cortical trophicity. No pyelocaliceal dilation. No adrenal nodule.</div>
+        <div class="scan-item" style="border-left:2px solid var(--amber);"><strong style="color:var(--amber)">⚠ Right Iliac Fossa:</strong> Liquid stasis in several intestinal loops — may indicate bowel sluggishness or mild ileus.</div>
+        <div class="scan-item"><strong>Peritoneum / Lymph / Lungs:</strong> No peritoneal effusion. No lymphadenopathy. Clear lung bases.</div>
+      </div>
+      <div class="hosp-sec">
+        <div class="hosp-sec-lbl">IV Medications Administered in ER</div>
+        <div class="med-pills">
+          <span class="mpill">Paracetamol 1g IV</span>
+          <span class="mpill">Ondansetron 8mg ×2</span>
+          <span class="mpill">Scopinal 20mg</span>
+          <span class="mpill">Ipproton 40mg</span>
+          <span class="mpill">Pethidine 100mg</span>
+          <span class="mpill">Metoclopramide 10mg</span>
+          <span class="mpill">Depakine 400mg/4ml IV</span>
+          <span class="mpill">Serum Mixte 0.45% 1L</span>
+        </div>
+      </div>
+      <div class="hosp-sec">
+        <div class="hosp-sec-lbl">Billing Summary — No. FR26007171</div>
+        <table class="btable">
+          <thead><tr><th>Category</th><th>Description</th><th style="text-align:right">Total</th></tr></thead>
+          <tbody>
+            <tr><td>Urgences</td><td>Frais Urgence Petite</td><td style="text-align:right">25.00</td></tr>
+            <tr><td>Consultation</td><td>Dr. Hakim Philippe Michel</td><td style="text-align:right">50.00</td></tr>
+            <tr><td>IV / Infusion</td><td>Serum + Montage IV + Angiocath + Tegaderm</td><td style="text-align:right">~37.22</td></tr>
+            <tr><td>Medications</td><td>Paracetamol, Ondansetron, Depakine IV, Pethidine, Ipproton, etc.</td><td style="text-align:right">~23.17</td></tr>
+            <tr><td>CT Scan</td><td>Abdominal + Pelvic + Contrast Omnipaque</td><td style="text-align:right">~323.00</td></tr>
+            <tr><td>Lab Tests</td><td>FNS, Creatinine, Liver enzymes, CRP, Electrolytes</td><td style="text-align:right">~51.75</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== EPILEPSY JOURNAL ========== -->
+<div id="sec-journal" class="section">
+  <div class="section-title">Epilepsy Journal <span class="tag tag-red">2 RECORDED</span></div>
+  <div class="stats-row">
+    <div class="sc"><div class="sc-val" style="color:var(--red)">2</div><div class="sc-lbl">Total Seizures</div></div>
+    <div class="sc"><div class="sc-val" style="color:var(--amber)" id="daysBetween">63</div><div class="sc-lbl">Days Between</div></div>
+    <div class="sc"><div class="sc-val" style="color:var(--green)" id="daysFree">54+</div><div class="sc-lbl">Days Seizure-Free</div></div>
+  </div>
+  <div class="seizure-timeline">
+    <div class="sz-entry">
+      <div class="sz-date">18 December 2025</div>
+      <div class="sz-lbl">⚡ SEIZURE EVENT #1</div>
+      <div class="sz-note">First recorded event in the current monitoring period. Two days prior (16/12/2025), Steven had a shoulder dislocation incident. Period of elevated physical and psychological stress.</div>
+    </div>
+    <div class="sz-entry">
+      <div class="sz-date">19 February 2026</div>
+      <div class="sz-lbl">⚡ SEIZURE EVENT #2</div>
+      <div class="sz-note">Occurred <span id="d2delta">63 days</span> after the first event. Followed by severe post-seizure vomiting requiring ER admission at 01:21 AM on 20/02/2026. IV Depakine, anti-emetics, and abdominal CT scan performed. Patient on Depakine Chrono 500mg — multiple missed/irregular doses documented in the log.</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">Compliance Warning</div>
+    <div style="font-size:13px;color:var(--text2);line-height:1.8;">
+      Diet tracker shows <span style="color:var(--orange);font-weight:600;">frequent missed or significantly delayed Depakine doses</span> throughout the monitoring period. Examples: dose taken at 12:42 AM (instead of evening), multiple days with "medication forgotten", irregular morning vs evening patterns. Consistent twice-daily adherence is critical for maintaining therapeutic levels and reducing seizure risk.
+    </div>
+  </div>
+</div>
+
+<!-- ========== DIET TRACKER ========== -->
+<div id="sec-diet" class="section">
+  <div class="section-title">Diet &amp; Medication Tracker <span class="tag tag-amber">FEB – APR 2026</span></div>
+
+  <div class="month-hdr" onclick="toggleMonth('feb')">February 2026 <span class="chevron" id="chev-feb">▼</span></div>
+  <div class="month-body" id="month-feb"><div id="feb-days"></div></div>
+
+  <div class="month-hdr" onclick="toggleMonth('mar')" style="margin-top:4px">March 2026 <span class="chevron" id="chev-mar">▼</span></div>
+  <div class="month-body" id="month-mar"><div id="mar-days"></div></div>
+
+  <div class="month-hdr" onclick="toggleMonth('apr')" style="margin-top:4px">April 2026 <span class="chevron" id="chev-apr">▼</span></div>
+  <div class="month-body" id="month-apr"><div id="apr-days"></div></div>
+</div>
+
+<footer>
+  <p>CONFIDENTIAL · STEVEN H. TCHAKERIAN · DM021051 · DIETITIAN JESSICA R. ATTALLAH · NEXT VISIT 25 APR 2026</p>
+</footer>
+</div>
+
+<script>
+function showTab(id,el){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById('sec-'+id).classList.add('active');el.classList.add('active');}
+function toggleMonth(id){var b=document.getElementById('month-'+id),c=document.getElementById('chev-'+id);b.classList.toggle('open');c.classList.toggle('open');}
+function toggleHosp(id){var b=document.getElementById('body-'+id),c=document.getElementById('chev-'+id);b.classList.toggle('open');c.classList.toggle('open');}
+function toggleDay(id){var b=document.getElementById('db-'+id),c=document.getElementById('dc-'+id);b.classList.toggle('open');c.classList.toggle('open');}
+
+function mealIcon(t){
+  if(!t||t==='—'||t==='daytime'||t==='morning')return'🌓';
+  var c=t.replace(/\s/g,'').toLowerCase(),m=c.match(/(\d+)(?::(\d+))?\s*(am|pm)/);
+  if(!m)return'🌓';
+  var h=parseInt(m[1]),p=m[3];
+  if(p==='pm'&&h!==12)h+=12;if(p==='am'&&h===12)h=0;
+  if(h>=5&&h<11)return'🌅';if(h>=11&&h<16)return'🌆';if(h>=16&&h<20)return'🌇';return'🌃';
+}
+
+function buildMeal(m){
+  var medsHtml=m.missed?'<span class="miss-pill">⚠ Missed</span>':
+    (m.meds&&m.meds.length?m.meds.map(md=>'<span class="mt">'+(md.time||'')+'</span><span class="mp">'+md.name+'</span>').join(''):'<span class="no-med">None recorded</span>');
+  return '<div class="meal-entry"><div class="meal-icon-col">'+mealIcon(m.time)+'</div><div class="meal-time-col">'+(m.time||'—')+'</div><div class="meal-content"><div class="meal-str">'+m.meal+'</div><div class="meds-row">'+medsHtml+'</div></div></div>';
+}
+
+function buildDay(day,idx,mth){
+  var anyMeds=day.meals.some(m=>m.meds&&m.meds.length>0);
+  var anyMiss=day.meals.some(m=>m.missed);
+  var badge=anyMiss?'<span class="bm-miss">MISSED ⚠</span>':anyMeds?'<span class="bm-ok">MEDS ✓</span>':'<span class="bm-no">NO MEDS</span>';
+  var summary=day.meals.map(m=>m.meal).join(' · ');
+  return '<div class="day-card"><div class="day-hdr" onclick="toggleDay(\''+mth+'-'+idx+'\')"><span class="day-date-lbl">'+day.date+'</span><span class="day-summary">'+summary+'</span>'+badge+'<span class="chevron" id="dc-'+mth+'-'+idx+'">▾</span></div><div class="day-body" id="db-'+mth+'-'+idx+'">'+day.meals.map(buildMeal).join('')+'</div></div>';
+}
+
+function renderDays(data,mth,cid){document.getElementById(cid).innerHTML=data.map((d,i)=>buildDay(d,i,mth)).join('');}
+
+var febData=[
+  {date:'Feb 20',meals:[{time:'11:00 PM',meal:'Beuftek + purée',meds:[{time:'10:24 PM',name:'Gastrimut'},{time:'8:45 PM',name:'Depakine'},{time:'8:46 PM',name:'Normix ×2'},{time:'8:47 PM',name:'Vit D3'},{time:'8:48 PM',name:'Magnesium'}]}]},
+  {date:'Feb 21',meals:[
+    {time:'11:00 AM',meal:'Beuftek + purée + salad',meds:[{time:'10:57 AM',name:'Gastrimut'},{time:'11:28 AM',name:'Cinitrex · Depakine · Vitanor · Normix ×2 · Vit D3 · Mg · Vit C'}]},
+    {time:'7:48 PM',meal:'Tuna + salad + rice',meds:[{time:'6:40 PM',name:'Gastrimut'},{time:'7:00 PM',name:'Normix ×2 · Dovaken Chrono'}]},
+    {time:'10:20 PM',meal:'Beuftek + nuts',meds:[]}]},
+  {date:'Feb 22',meals:[
+    {time:'11:57 AM',meal:'Nouba + Choco Prince + Pop Cake',meds:[{time:'11:57 AM',name:'Gastrimut · Cinitrex · Depakine · Vitanor · Normix ×2 · Vit D3 · Mg'}]},
+    {time:'2:38 PM',meal:'Beuftek + purée',meds:[{time:'2:40 PM',name:'Vitamin C extra'}]},
+    {time:'9:42 PM',meal:'Beuftek + purée',meds:[{time:'9:43 PM',name:'Dovaken Chrono · Normix ×2 · Magnesium'}]}]},
+  {date:'Feb 23',meals:[
+    {time:'12:18 AM',meal:'Baked potatoes with cheese',meds:[]},
+    {time:'11:17 AM',meal:'Nouba + Pop Cake',meds:[{time:'11:20 AM',name:'Gastrimut · Cinitrex · Dovaken Chrono · Vitanor · Normix ×2 · Vit D3 · Mg · Vit C'}]},
+    {time:'7:35 PM',meal:'Mac & Cheese',meds:[{time:'7:35 PM',name:'Dovaken Chrono · Magnesium'}]}]},
+  {date:'Feb 24',meals:[
+    {time:'11:00 AM',meal:'Pain au lait',meds:[{time:'11:10 AM',name:'Gastrimut · Cinitrex · Dovaken Chrono · Vit D3 · Mg · Vit C'}]},
+    {time:'2:13 PM',meal:'Hamburger + potato sandwich',meds:[]},
+    {time:'8:40 PM',meal:'Tuna + fried potato + salad',meds:[]},
+    {time:'9:46 PM',meal:'Fried potato',meds:[{time:'10:03 PM',name:'Dovaken Chrono · Magnesium'}]},
+    {time:'11:35 PM',meal:'Burger + fries (McDonalds)',meds:[]}]},
+  {date:'Feb 25',meals:[
+    {time:'11:40 AM',meal:'Pain au lait + lotus cream',meds:[{time:'11:40 AM',name:'Gastrimut · Cinitrex · Dovaken Chrono · Vit D3 · Mg · Vit C'}]},
+    {time:'1:56 PM',meal:'Hamburger + potato sandwich',meds:[]},
+    {time:'8:20 PM',meal:'Mouloukieh + rice',meds:[{time:'8:20 PM',name:'Dovaken Chrono · Magnesium'}]}]},
+  {date:'Feb 26',meals:[
+    {time:'10:35 AM',meal:'Pain au lait + lotus cream',meds:[{time:'10:40 AM',name:'Gastrimut · Dovaken Chrono · Vit D3 · Mg · Vit C · Omega3'}]},
+    {time:'2:15 PM',meal:'Hamburger + potato sandwich',meds:[]},
+    {time:'8:30 PM',meal:'Mac & Cheese',meds:[{time:'8:30 PM',name:'Dovaken Chrono'}]}]},
+  {date:'Feb 27',meals:[
+    {time:'3:15 AM',meal:'Lotus cream + pain au lait',meds:[]},
+    {time:'10:45 AM',meal:'Nescafé + pain au lait + lotus',meds:[],missed:true},
+    {time:'7:35 PM',meal:'Burger + french fries',meds:[]},
+    {time:'11:45 PM',meal:'Tuna + fried potato',meds:[{time:'11:45 PM',name:'Dovaken Chrono'}]}]},
+  {date:'Feb 28',meals:[{time:'5:38 PM',meal:'2 beef sandwiches',meds:[{time:'5:39 PM',name:'Vit D3 · Depakine · Gastrimut · Magnesium · Cinitrex'}]}]}
+];
+
+var marData=[
+  {date:'Mar 1',meals:[
+    {time:'2:26 AM',meal:'Soujouk sandwich',meds:[{time:'',name:'Dovaken Chrono'}]},
+    {time:'6:07 PM',meal:'2 soujouk sandwiches',meds:[{time:'6:07 PM',name:'Vit D3 · Depakine · Gastrimut · Mg · Vitanor'}]},
+    {time:'9:45 PM',meal:'Lotus crêpes',meds:[]},
+    {time:'10:30 PM',meal:'Soujouk sandwich',meds:[]}]},
+  {date:'Mar 2',meals:[
+    {time:'1:30 PM',meal:'Cheese & zaatar',meds:[{time:'1:30 PM',name:'Vit D3 · Depakine · Gastrimut · Mg · Vitanor'}]},
+    {time:'7:20 PM',meal:'2 beef sandwiches',meds:[{time:'9:30 PM',name:'Depakine'}]}]},
+  {date:'Mar 3',meals:[
+    {time:'1:30 PM',meal:'Tuna with onions',meds:[{time:'1:30 PM',name:'Vit D3 · Depakine · Gastrimut · Mg · Vitanor'}]},
+    {time:'7:55 PM',meal:'Maanek sandwich',meds:[]},
+    {time:'11:50 PM',meal:'Mac & Cheese',meds:[{time:'11:50 PM',name:'Depakine'}]}]},
+  {date:'Mar 4',meals:[
+    {time:'2:45 PM',meal:'Burger + potato sandwich',meds:[],missed:true},
+    {time:'9:49 PM',meal:'Maanek sandwich',meds:[{time:'9:49 PM',name:'Depakine · Mg · Vit D3 · Vitanor'}]}]},
+  {date:'Mar 5',meals:[
+    {time:'5:39 PM',meal:'Burger sandwich',meds:[]},
+    {time:'12:10 AM',meal:'Tuna + fried potatoes',meds:[]}]},
+  {date:'Mar 6',meals:[
+    {time:'1:15 AM',meal:'Chicken soup',meds:[{time:'1:20 AM',name:'Depakine'}]},
+    {time:'5:30 PM',meal:'Burger',meds:[]}]},
+  {date:'Mar 7',meals:[{time:'8:30 PM',meal:'2 Burgers + cheesecake',meds:[{time:'8:38 PM',name:'Depakine'}]}]},
+  {date:'Mar 8',meals:[{time:'8:00 PM',meal:'Kaafta sandwich',meds:[{time:'8:20 PM',name:'Depakine · Magnesium'}]}]},
+  {date:'Mar 9',meals:[
+    {time:'12:55 AM',meal:'Tuna + potatoes + chocolate protein shake',meds:[]},
+    {time:'3:15 PM',meal:'Burger',meds:[]},
+    {time:'8:32 PM',meal:'Burger',meds:[{time:'8:32 PM',name:'Depakine'}]},
+    {time:'10:54 PM',meal:'Donuts',meds:[]}]},
+  {date:'Mar 10',meals:[
+    {time:'3:30 PM',meal:'Donuts + protein shake',meds:[]},
+    {time:'4:40 PM',meal:'Rice + Mouloukieh',meds:[]},
+    {time:'11:10 PM',meal:'Chicken sandwich',meds:[{time:'12:30 AM',name:'Depakine'}]}]},
+  {date:'Mar 11',meals:[
+    {time:'5:06 PM',meal:'Donuts + protein shake',meds:[{time:'5:06 PM',name:'Depakine'}]},
+    {time:'6:30 PM',meal:'Lentil soup',meds:[]},
+    {time:'11:03 PM',meal:'Tuna + potatoes',meds:[]}]},
+  {date:'Mar 12',meals:[
+    {time:'7:58 AM',meal:'Donuts + protein shake',meds:[{time:'7:58 AM',name:'Depakine'}]},
+    {time:'6:44 PM',meal:'Tawouk',meds:[]}]},
+  {date:'Mar 13',meals:[
+    {time:'1:47 AM',meal:'Kebab',meds:[]},
+    {time:'5:16 PM',meal:'Protein shake',meds:[{time:'5:00 PM',name:'Depakine · Vit D3 · Vit C · Cinitrex · Mg'}]},
+    {time:'7:52 PM',meal:'Homemade pepperoni pizza (6 slices)',meds:[]}]},
+  {date:'Mar 14',meals:[
+    {time:'1:42 AM',meal:'Brownies',meds:[]},
+    {time:'4:50 PM',meal:'Protein shake',meds:[]},
+    {time:'5:20 PM',meal:'Pizza + salad + fried potato',meds:[{time:'5:40 PM',name:'Depakine · Vit D3 · Vit C · Cinitrex · Mg'}]},
+    {time:'9:14 PM',meal:'Cheese rolls',meds:[]}]},
+  {date:'Mar 15',meals:[
+    {time:'2:18 AM',meal:'Mac & Cheese',meds:[{time:'2:18 AM',name:'Depakine'}]},
+    {time:'8:25 PM',meal:'Pizza + salad + fries',meds:[{time:'8:35 PM',name:'Depakine'}]},
+    {time:'10:15 PM',meal:'Cheese rolls + lokum + pizza',meds:[]}]},
+  {date:'Mar 16',meals:[
+    {time:'12:16 AM',meal:'Pop cakes',meds:[]},
+    {time:'10:10 PM',meal:'Pizza',meds:[{time:'10:10 PM',name:'Depakine'}]}]},
+  {date:'Mar 17',meals:[{time:'7:08 PM',meal:'Rice + yogurt',meds:[{time:'7:08 PM',name:'Depakine'}]}]},
+  {date:'Mar 18',meals:[
+    {time:'4:30 PM',meal:'Rice + yogurt + fried potato',meds:[]},
+    {time:'9:40 PM',meal:'Mac & Cheese',meds:[]},
+    {time:'11:11 PM',meal:'Salty homemade cookies',meds:[{time:'12:42 AM',name:'Depakine'}]}]},
+  {date:'Mar 19',meals:[{time:'—',meal:'Beuftek + purée (×2)',meds:[],missed:true}]},
+  {date:'Mar 20',meals:[
+    {time:'7:05 AM',meal:'Burger',meds:[],missed:true},
+    {time:'9:30 PM',meal:'(not recorded)',meds:[{time:'11:00 PM',name:'Depakine'}]}]},
+  {date:'Mar 28',meals:[
+    {time:'6:49 AM',meal:'Homemade pizza (1 slice)',meds:[{time:'6:49 AM',name:'Depakine · Vit D3 · Vitanor · Mg · Vit C'}]},
+    {time:'12:41 PM',meal:'Loz + foul',meds:[]},
+    {time:'11:54 PM',meal:'Burger + loz + foul',meds:[{time:'11:00 PM',name:'Depakine · Gastrimut'}]}]},
+  {date:'Mar 29',meals:[{time:'daytime',meal:'2 tawouk sandwiches',meds:[{time:'',name:'Depakine · Vit D3 · Vit C · Vitanor · Mg'}]}]},
+  {date:'Mar 30',meals:[{time:'11:54 PM',meal:'Burger ×2',meds:[{time:'',name:'Depakine'}]}]},
+  {date:'Mar 31',meals:[{time:'11:54 PM',meal:'Manteh + tuna + cornflour + fried potatoes',meds:[{time:'',name:'Depakine'}]}]}
+];
+
+var aprData=[
+  {date:'Apr 1–11',meals:[{time:'—',meal:'Not tracked — personal reasons (11-day gap)',meds:[],missed:true}]},
+  {date:'Apr 12',meals:[{time:'—',meal:'Tuna + fried potatoes + salad',meds:[{time:'morning',name:'Depakine'}]}]},
+  {date:'Apr 13',meals:[{time:'—',meal:'57cm fried chicken sandwich',meds:[{time:'morning',name:'Depakine'}]}]},
+  {date:'Apr 14',meals:[{time:'—',meal:'35cm chicken sandwich',meds:[{time:'morning',name:'Depakine'}]}]},
+  {date:'Apr 15',meals:[{time:'—',meal:'French fries + Italian sandwich + labneh + veggies',meds:[{time:'morning',name:'Depakine'}]}]}
+];
+
+renderDays(febData,'feb','feb-days');
+renderDays(marData,'mar','mar-days');
+renderDays(aprData,'apr','apr-days');
+
+var d1=new Date('2025-12-18'),d2=new Date('2026-02-19'),today=new Date('2026-04-15');
+document.getElementById('daysBetween').textContent=Math.round((d2-d1)/864e5);
+document.getElementById('daysFree').textContent=Math.round((today-d2)/864e5)+'+';
+document.getElementById('d2delta').textContent=Math.round((d2-d1)/864e5)+' days';
+</script>
+</body>
+</html>
