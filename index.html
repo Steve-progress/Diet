@@ -161,6 +161,21 @@
   .no-med{font-family:var(--fm);font-size:10px;color:rgba(239,68,68,.7);padding:2px 8px;background:rgba(239,68,68,.05);border:1px solid rgba(239,68,68,.15);}
   .miss-pill{font-family:var(--fm);font-size:10px;color:var(--orange);padding:2px 8px;background:rgba(249,115,22,.06);border:1px solid rgba(249,115,22,.2);}
 
+  /* ===== FAVORITES ===== */
+  .fav-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-bottom:16px;}
+  .fav-card{background:var(--card);border:1px solid var(--border);overflow:hidden;}
+  .fav-card-hdr{padding:12px 18px 10px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;}
+  .fav-card-icon{font-size:18px;line-height:1;}
+  .fav-card-title{font-family:var(--fh);font-size:14px;font-weight:700;letter-spacing:2px;text-transform:uppercase;}
+  .fav-table{width:100%;border-collapse:collapse;}
+  .fav-table tr{border-bottom:1px solid var(--border);}
+  .fav-table tr:last-child{border-bottom:none;}
+  .fav-table td{padding:9px 18px;font-size:13px;color:var(--text2);vertical-align:middle;}
+  .fav-table td:first-child{width:32px;font-size:15px;padding-right:4px;}
+  .fav-table td:last-child{font-family:var(--fm);font-size:10px;color:var(--text3);text-align:right;}
+  .fav-table tr:hover td{background:rgba(255,255,255,.02);color:var(--text);}
+  .fav-note{font-size:11px;color:var(--text3);padding:10px 18px;border-top:1px solid var(--border);line-height:1.6;font-style:italic;}
+
   footer{border-top:1px solid var(--border);padding-top:20px;margin-top:40px;text-align:center;}
   footer p{font-family:var(--fm);font-size:10px;color:var(--text3);letter-spacing:2px;}
 </style>
@@ -186,6 +201,7 @@
   <div class="tab" onclick="showTab('hosp',this)">Hospitalizations</div>
   <div class="tab" onclick="showTab('journal',this)">Epilepsy Journal</div>
   <div class="tab" onclick="showTab('diet',this)">Diet Tracker</div>
+  <div class="tab" onclick="showTab('favorites',this)">Favorites</div>
 </div>
 
 <!-- ========== PROFILE ========== -->
@@ -205,7 +221,6 @@
           <div class="stat-item"><div class="stat-lbl">Height</div><div class="stat-val">175.5<span class="stat-u">cm</span></div></div>
           <div class="stat-item"><div class="stat-lbl">BMI</div><div class="stat-val" style="color:var(--orange)">18.8<span class="stat-u"> ↓</span></div></div>
           <div class="stat-item"><div class="stat-lbl">Blood Type</div><div class="stat-val">A<span class="stat-u">+</span></div></div>
-
         </div>
       </div>
     </div>
@@ -555,6 +570,112 @@
   <div class="month-body" id="month-apr"><div id="apr-days"></div></div>
 </div>
 
+<!-- ========== FAVORITES ========== -->
+<div id="sec-favorites" class="section">
+  <div class="section-title">Food Preferences <span class="tag tag-green">STEVEN'S FAVORITES</span></div>
+
+  <div style="font-family:var(--fm);font-size:11px;color:var(--text3);margin-bottom:20px;padding:10px 16px;background:rgba(0,212,170,.04);border:1px solid rgba(0,212,170,.15);border-left:3px solid var(--teal);">
+    Reference sheet for dietitian Jessica R. Attallah — foods Steven accepts and enjoys. Use for meal planning and weight gain strategy.
+  </div>
+
+  <div class="fav-grid">
+
+    <!-- VEGETABLES -->
+    <div class="fav-card">
+      <div class="fav-card-hdr" style="border-left:3px solid var(--green);">
+        <div class="fav-card-icon">🥦</div>
+        <div class="fav-card-title" style="color:var(--green);">Vegetables</div>
+        <span class="tag tag-green" style="margin-left:auto;">7 items</span>
+      </div>
+      <table class="fav-table">
+        <tr><td>🥒</td><td>Fresh Cucumber</td><td>raw · daily</td></tr>
+        <tr><td>🥬</td><td>Lettuce</td><td>salads</td></tr>
+        <tr><td>🧅</td><td>Red Onions</td><td>raw · tuna dishes</td></tr>
+        <tr><td>🌿</td><td>Green Onions</td><td>garnish</td></tr>
+        <tr><td>🥦</td><td>Cabbage</td><td>raw · cooked</td></tr>
+        <tr><td>🌱</td><td>Green Almonds</td><td>fresh seasonal</td></tr>
+        <tr><td>🫘</td><td>Fresh Fava Beans</td><td>seasonal · فول أخضر</td></tr>
+      </table>
+      <div class="fav-note">Prefers vegetables raw. Cucumber appears most frequently in the diet log (rice cake + labneh + cucumber combos).</div>
+    </div>
+
+    <!-- FRUITS -->
+    <div class="fav-card">
+      <div class="fav-card-hdr" style="border-left:3px solid var(--amber);">
+        <div class="fav-card-icon">🍎</div>
+        <div class="fav-card-title" style="color:var(--amber);">Fruits</div>
+        <span class="tag tag-amber" style="margin-left:auto;">5 items</span>
+      </div>
+      <table class="fav-table">
+        <tr><td>🥑</td><td>Avocado</td><td>high-fat · calorie dense</td></tr>
+        <tr><td>🍏</td><td>Green Apple</td><td>raw · snack</td></tr>
+        <tr><td>🍍</td><td>Pineapple (Ananas)</td><td>fresh / canned</td></tr>
+        <tr><td>🥭</td><td>Mango</td><td>fresh · smoothie</td></tr>
+        <tr><td>🍌</td><td>Banana</td><td>snack · shake base</td></tr>
+      </table>
+      <div class="fav-note">Avocado and banana are excellent calorie-dense additions for weight gain goals. Banana pairs well with protein shakes.</div>
+    </div>
+
+    <!-- FAVORITE DISHES -->
+    <div class="fav-card">
+      <div class="fav-card-hdr" style="border-left:3px solid var(--orange);">
+        <div class="fav-card-icon">🍽️</div>
+        <div class="fav-card-title" style="color:var(--orange);">Favorite Dishes</div>
+        <span class="tag tag-amber" style="margin-left:auto;">5 items</span>
+      </div>
+      <table class="fav-table">
+        <tr><td>🍔</td><td>Burgers</td><td>very frequent · homemade &amp; takeout</td></tr>
+        <tr><td>🥩</td><td>Kibbeh Nayyeh</td><td>Lebanese raw beef</td></tr>
+        <tr><td>🧀</td><td>Mac &amp; Cheese</td><td>frequent comfort meal</td></tr>
+        <tr><td>🍟</td><td>French Fries</td><td>daily staple</td></tr>
+        <tr><td>🍗</td><td>Fried Chicken</td><td>sandwiches · frequent</td></tr>
+      </table>
+      <div class="fav-note">Burgers, fries, and fried chicken dominate the diet log. Mac & Cheese is a preferred home-cooked option. These can be enriched (butter, cheese, avocado) for calorie boosting.</div>
+    </div>
+
+    <!-- PROTEINS -->
+    <div class="fav-card">
+      <div class="fav-card-hdr" style="border-left:3px solid var(--cyan);">
+        <div class="fav-card-icon">💪</div>
+        <div class="fav-card-title" style="color:var(--cyan);">Protein Sources</div>
+        <span class="tag tag-blue" style="margin-left:auto;">4 items</span>
+      </div>
+      <table class="fav-table">
+        <tr><td>🦐</td><td>Shrimp</td><td>high protein · low fat</td></tr>
+        <tr><td>🐟</td><td>Tuna</td><td>canned · very frequent</td></tr>
+        <tr><td>🍗</td><td>Chicken Breast</td><td>grilled · baked</td></tr>
+        <tr><td>🥩</td><td>Lean Beef</td><td>beuftek · kibbeh · sandwiches</td></tr>
+      </table>
+      <div class="fav-note">Tuna (canned with red onions) is Steven's most consistent protein source in the log. Chicken breast appears baked or fried. All four sources are highly compatible with weight gain + epilepsy diet goals.</div>
+    </div>
+
+  </div>
+
+  <!-- SNACKS ROW -->
+  <div class="card">
+    <div class="card-title">🍫 Frequent Snacks <span style="color:var(--text3);font-family:var(--fm);font-size:10px;font-weight:400;">observed from diet log</span></div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:4px;">
+      <span style="font-family:var(--fm);font-size:11px;padding:5px 12px;background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.25);color:var(--amber);">🧀 Cheese Rolls</span>
+      <span style="font-family:var(--fm);font-size:11px;padding:5px 12px;background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.25);color:var(--amber);">🍫 Lotus Cream</span>
+      <span style="font-family:var(--fm);font-size:11px;padding:5px 12px;background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.25);color:var(--amber);">🍰 Brownies</span>
+      <span style="font-family:var(--fm);font-size:11px;padding:5px 12px;background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.25);color:var(--amber);">🎂 Cheesecake</span>
+      <span style="font-family:var(--fm);font-size:11px;padding:5px 12px;background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.25);color:var(--amber);">🍩 Donuts</span>
+      <span style="font-family:var(--fm);font-size:11px;padding:5px 12px;background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.25);color:var(--amber);">🍞 Pain au Lait</span>
+      <span style="font-family:var(--fm);font-size:11px;padding:5px 12px;background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.25);color:var(--amber);">🥛 Protein Shake</span>
+      <span style="font-family:var(--fm);font-size:11px;padding:5px 12px;background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.25);color:var(--amber);">🍰 Pop Cakes</span>
+      <span style="font-family:var(--fm);font-size:11px;padding:5px 12px;background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.25);color:var(--amber);">🥜 Nuts</span>
+      <span style="font-family:var(--fm);font-size:11px;padding:5px 12px;background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.25);color:var(--amber);">🫐 Rice Cakes</span>
+    </div>
+  </div>
+
+  <!-- DIETITIAN NOTE -->
+  <div class="card" style="border-color:rgba(0,212,170,.3);background:rgba(0,212,170,.03);">
+    <div class="card-title" style="color:var(--teal);">📋 Dietitian Notes — Jessica R. Attallah</div>
+    <div style="font-size:13px;color:var(--text2);line-height:1.9;">
+    </div>
+  </div>
+</div>
+
 <footer>
   <p>CONFIDENTIAL · STEVEN H. TCHAKERIAN · Monitored by Christine Kalaydjian · Kalaydjyan.christine@gmail.com</p>
 </footer>
@@ -575,21 +696,27 @@ function mealIcon(t){
   if(h>=5&&h<11)return'🌅';if(h>=11&&h<16)return'🌆';if(h>=16&&h<20)return'🌇';return'🌃';
 }
 
+function normMeds(meds){
+  if(!meds||!meds.length)return[];
+  return meds.map(function(m){return(typeof m==='string')?{name:m}:m;});
+}
+
 function buildMeal(m){
+  var meds=normMeds(m.meds);
   var medsHtml=m.missed?'<span class="miss-pill">⚠ Missed</span>':
-    (m.meds&&m.meds.length?m.meds.map(md=>'<span class="mt">'+(md.time||'')+'</span><span class="mp">'+md.name+'</span>').join(''):'<span class="no-med">None recorded</span>');
+    (meds.length?meds.map(function(md){return'<span class="mt">'+(md.time||'')+'</span><span class="mp">'+md.name+'</span>';}).join(''):'<span class="no-med">None recorded</span>');
   return '<div class="meal-entry"><div class="meal-icon-col">'+mealIcon(m.time)+'</div><div class="meal-time-col">'+(m.time||'—')+'</div><div class="meal-content"><div class="meal-str">'+m.meal+'</div><div class="meds-row">'+medsHtml+'</div></div></div>';
 }
 
 function buildDay(day,idx,mth){
-  var anyMeds=day.meals.some(m=>m.meds&&m.meds.length>0);
-  var anyMiss=day.meals.some(m=>m.missed);
+  var anyMeds=day.meals.some(function(m){var md=normMeds(m.meds);return md.length>0;});
+  var anyMiss=day.meals.some(function(m){return m.missed;});
   var badge=anyMiss?'<span class="bm-miss">MISSED ⚠</span>':anyMeds?'<span class="bm-ok">MEDS ✓</span>':'<span class="bm-no">NO MEDS</span>';
-  var summary=day.meals.map(m=>m.meal).join(' · ');
+  var summary=day.meals.map(function(m){return m.meal;}).join(' · ');
   return '<div class="day-card"><div class="day-hdr" onclick="toggleDay(\''+mth+'-'+idx+'\')"><span class="day-date-lbl">'+day.date+'</span><span class="day-summary">'+summary+'</span>'+badge+'<span class="chevron" id="dc-'+mth+'-'+idx+'">▾</span></div><div class="day-body" id="db-'+mth+'-'+idx+'">'+day.meals.map(buildMeal).join('')+'</div></div>';
 }
 
-function renderDays(data,mth,cid){document.getElementById(cid).innerHTML=data.map((d,i)=>buildDay(d,i,mth)).join('');}
+function renderDays(data,mth,cid){document.getElementById(cid).innerHTML=data.map(function(d,i){return buildDay(d,i,mth);}).join('');}
 
 var febData=[
   {date:'Feb 20',meals:[{time:'11:00 PM',meal:'Beuftek + purée',meds:[{time:'10:24 PM',name:'Gastrimut'},{time:'8:45 PM',name:'Depakine'},{time:'8:46 PM',name:'Normix ×2'},{time:'8:47 PM',name:'Vit D3'},{time:'8:48 PM',name:'Magnesium'}]}]},
@@ -629,7 +756,7 @@ var febData=[
 
 var marData=[
   {date:'Mar 1',meals:[
-    {time:'2:26 AM',meal:'Soujouk sandwich',meds:[{time:'',name:'Dovaken Chrono'}]},
+    {time:'2:26 AM',meal:'Soujouk sandwich',meds:[{name:'Dovaken Chrono'}]},
     {time:'6:07 PM',meal:'2 soujouk sandwiches',meds:[{time:'6:07 PM',name:'Vit D3 · Depakine · Gastrimut · Mg · Vitanor'}]},
     {time:'9:45 PM',meal:'Lotus crêpes',meds:[]},
     {time:'10:30 PM',meal:'Soujouk sandwich',meds:[]}]},
@@ -696,62 +823,63 @@ var marData=[
     {time:'6:49 AM',meal:'Homemade pizza (1 slice)',meds:[{time:'6:49 AM',name:'Depakine · Vit D3 · Vitanor · Mg · Vit C'}]},
     {time:'12:41 PM',meal:'Loz + foul',meds:[]},
     {time:'11:54 PM',meal:'Burger + loz + foul',meds:[{time:'11:00 PM',name:'Depakine · Gastrimut'}]}]},
-  {date:'Mar 29',meals:[{time:'daytime',meal:'2 tawouk sandwiches',meds:[{time:'',name:'Depakine · Vit D3 · Vit C · Vitanor · Mg'}]}]},
-  {date:'Mar 30',meals:[{time:'11:54 PM',meal:'Burger ×2',meds:[{time:'',name:'Depakine'}]}]},
-  {date:'Mar 31',meals:[{time:'11:54 PM',meal:'Manteh + tuna + cornflour + fried potatoes',meds:[{time:'',name:'Depakine'}]}]}
+  {date:'Mar 29',meals:[{time:'daytime',meal:'2 tawouk sandwiches',meds:[{name:'Depakine · Vit D3 · Vit C · Vitanor · Mg'}]}]},
+  {date:'Mar 30',meals:[{time:'11:54 PM',meal:'Burger ×2',meds:[{name:'Depakine'}]}]},
+  {date:'Mar 31',meals:[{time:'11:54 PM',meal:'Manteh + tuna + cornflour + fried potatoes',meds:[{name:'Depakine'}]}]}
 ];
 
+/* FIX: All missing ]} closings added, string meds converted to objects, double-colons fixed */
 var aprData=[
   {date:'Apr 1–10',meals:[{time:'—',meal:'Not tracked — personal reasons (11-day gap)',meds:[],missed:true}]},
   {date:'Apr 11',meals:[{time:'—',meal:'Tuna + fried potatoes + salad',meds:[{time:'morning',name:'Depakine'}]}]},
   {date:'Apr 12',meals:[{time:'—',meal:'57cm fried chicken sandwich',meds:[{time:'morning',name:'Depakine'}]}]},
   {date:'Apr 13',meals:[{time:'—',meal:'35cm chicken sandwich',meds:[{time:'morning',name:'Depakine'}]}]},
-  {date:'Apr 14',meals:[{time:'—',meal:'French fries + Italian sandwich + labneh + veggies',meds:[{time:'morning',name:'Depakine'}]}]}
+  {date:'Apr 14',meals:[{time:'—',meal:'French fries + Italian sandwich + labneh + veggies',meds:[{time:'morning',name:'Depakine'}]}]},
   {date:'Apr 15',meals:[
-    {time:'12:30 PM',meal:'3 rice cake + labneh + pepperroni + 3 fresh cucumber',meds:[{time:'12:34 PM',name:'Depakine · Vit D3 · Vitanor · Mg · Omega 3  · Ryvax'}]},
-    {time:'8:56 PM',meal:'fried chicken sandwich (he could only eat half of it)',meds:[]},
-    {time:'11:54 PM',meal:'fried chicken sandwich',meds:[{time:'11:00 PM',name:'Depakine'}]}]},
+    {time:'12:30 PM',meal:'3 rice cake + labneh + pepperoni + 3 fresh cucumber',meds:[{time:'12:34 PM',name:'Depakine · Vit D3 · Vitanor · Mg · Omega 3 · Ryvax'}]},
+    {time:'8:56 PM',meal:'Fried chicken sandwich (half)',meds:[]},
+    {time:'11:54 PM',meal:'Fried chicken sandwich',meds:[{time:'11:00 PM',name:'Depakine'}]}]},
   {date:'Apr 16',meals:[
-    {time:'12:55 PM',meal:'3 rice cake + labneh + italiene + 3 fresh cucumber',meds:[{time:'12:34 PM',name:'Depakine · Vit D3 · Vitanor · Magnesium · Omega 3  · Ryvax'}]},
-    {time:'4:35 PM',meal:'fried chicken sandwich',meds:[]},
-    {time:'9:38 PM',meal:'half chicken breast + baked potatoes',meds:[]},
+    {time:'12:55 PM',meal:'3 rice cake + labneh + italiene + 3 fresh cucumber',meds:[{time:'12:34 PM',name:'Depakine · Vit D3 · Vitanor · Magnesium · Omega 3 · Ryvax'}]},
+    {time:'4:35 PM',meal:'Fried chicken sandwich',meds:[]},
+    {time:'9:38 PM',meal:'Half chicken breast + baked potatoes',meds:[]}]},
   {date:'Apr 17',meals:[
-    {time:'1:40 PM',meal:'2 rice cake + labneh + pepperoni + nescafe',meds:[{time:'12:34 PM',name:'Depakine · Vit D3 · Vitanor · Magnesium · Omega 3  · Ryvax'}]},
-    {time:'6:59 PM',meal:'Macncheese with pepperoni',meds:[]},
-    {time:'7:05 PM',meal:'snack cheese rolls 4',meds:['Depakin']},
+    {time:'1:40 PM',meal:'2 rice cake + labneh + pepperoni + nescafe',meds:[{time:'12:34 PM',name:'Depakine · Vit D3 · Vitanor · Magnesium · Omega 3 · Ryvax'}]},
+    {time:'6:59 PM',meal:'Mac & Cheese with pepperoni',meds:[]},
+    {time:'7:05 PM',meal:'Snack cheese rolls ×4',meds:[{name:'Depakine'}]}]},
   {date:'Apr 18',meals:[
-    {time:'12:15 PM',meal:'nescafe',meds:[{time:'12:34 PM',name:'Depakine · Vit D3 · Vitanor · Magnesium · Omega 3  · Ryvax'}]},
-    {time:'1:14 PM',meal:'He was feeling hungry but once the food was ready he was feeling full',meds:[]},
-    {time:'7:16 PM',meal:'puree with lots of butter + popcorn + protein shake',meds:['vitamine C']},
-    {time:'1:44 AM',meal:'cheese rolls x6',meds:['Depakin']},
-    {time:'3:23 AM',meal:'fried chicken sandwich (he could only eat the half)',meds:['Depakin']},
+    {time:'12:15 PM',meal:'Nescafé',meds:[{time:'12:34 PM',name:'Depakine · Vit D3 · Vitanor · Magnesium · Omega 3 · Ryvax'}]},
+    {time:'1:14 PM',meal:'Felt hungry but full when food was ready',meds:[]},
+    {time:'7:16 PM',meal:'Purée with butter + popcorn + protein shake',meds:[{name:'Vitamin C'}]},
+    {time:'1:44 AM',meal:'Cheese rolls ×6',meds:[{name:'Depakine'}]},
+    {time:'3:23 AM',meal:'Fried chicken sandwich (half)',meds:[{name:'Depakine'}]}]},
   {date:'Apr 19',meals:[
-    {time:'4:54 PM',meal:'1 can of tuna with red onions + fried potatoes',meds:[{time:'12:34 PM',name:'Depakine · Vit D3 · Vitanor · Magnesium · Omega 3 '}]},
-    {time:'11::08 PM',meal:'cheese rolls x6 + 2 bites of brownies',meds:[]},
+    {time:'4:54 PM',meal:'1 can of tuna with red onions + fried potatoes',meds:[{time:'12:34 PM',name:'Depakine · Vit D3 · Vitanor · Magnesium · Omega 3'}]},
+    {time:'11:08 PM',meal:'Cheese rolls ×6 + 2 bites of brownies',meds:[]}]},
   {date:'Apr 20',meals:[
-    {time:'6:06 PM',meal:'1 can of tuna with red onions + fried potatoes (he couldnt eat half of the tuna)',meds:[{time:'12:34 PM',name:'Depakine'}]},
-    {time:'11::00 PM',meal:'mano soujouk sandwich',meds:[]},
-    {time:'2::00 AM',meal:'burgers and fries',meds:[]},
+    {time:'6:06 PM',meal:'1 can of tuna with red onions + fried potatoes (half eaten)',meds:[{time:'12:34 PM',name:'Depakine'}]},
+    {time:'11:00 PM',meal:'Mano soujouk sandwich',meds:[]},
+    {time:'2:00 AM',meal:'Burgers and fries',meds:[]}]},
   {date:'Apr 21',meals:[
-    {time:'3:47 PM',meal:'spaguetti with cheese (he couldnt finish the plate)',meds:[{time:'12:34 PM',name:'Depakine · Vit D3 · Vitanor · Magnesium · Omega 3 '}]},
-    {time:'10:56 PM',meal:'mano soujouk sandwich + chicken sandwich',meds:['depakin']},
-    {time:'2::00 AM',meal:'1 and half burgers and fries',meds:[]},
+    {time:'3:47 PM',meal:'Spaghetti with cheese (could not finish)',meds:[{time:'12:34 PM',name:'Depakine · Vit D3 · Vitanor · Magnesium · Omega 3'}]},
+    {time:'10:56 PM',meal:'Mano soujouk + chicken sandwich',meds:[{name:'Depakine'}]},
+    {time:'2:00 AM',meal:'1.5 burgers and fries',meds:[]}]},
   {date:'Apr 22',meals:[
-    {time:'4:30 PM',meal:'Sandwich makanek',meds:[{time:'12:34 PM',name:'Depakine · Vit D3 · Vitanor · Magnesium · Omega 3 '}]},
-    {time:'10:56 PM',meal:'sandwich makanek',meds:['depakin']},
+    {time:'4:30 PM',meal:'Sandwich makanek',meds:[{time:'12:34 PM',name:'Depakine · Vit D3 · Vitanor · Magnesium · Omega 3'}]},
+    {time:'10:56 PM',meal:'Sandwich makanek',meds:[{name:'Depakine'}]}]},
   {date:'Apr 23',meals:[
-    {time:'3:15 PM',meal:'Sandwich makanek',meds:[{time:'12:34 PM',name:'Depakine · Vit D3 · Vitanor · Magnesium · Omega 3 '}]},
-    {time:'11:06 PM',meal:'sandwich makanek',meds:['depakin . vitanor . Magnesium']},
+    {time:'3:15 PM',meal:'Sandwich makanek',meds:[{time:'12:34 PM',name:'Depakine · Vit D3 · Vitanor · Magnesium · Omega 3'}]},
+    {time:'11:06 PM',meal:'Sandwich makanek',meds:[{name:'Depakine · Vitanor · Magnesium'}]}]},
   {date:'Apr 24',meals:[
-    {time:'11:00 AM',meal:'1 and half labneh sandwich',meds:[{time:'12:34 PM',name:'Depakine · Vit D3 · Vitanor · Magnesium · Omega 3 '}]},
-    {time:'10:56 PM',meal:'sandwich makanek',meds:['depakin']},
+    {time:'11:00 AM',meal:'1.5 labneh sandwich',meds:[{time:'12:34 PM',name:'Depakine · Vit D3 · Vitanor · Magnesium · Omega 3'}]},
+    {time:'10:56 PM',meal:'Sandwich makanek',meds:[{name:'Depakine'}]}]}
 ];
 
 renderDays(febData,'feb','feb-days');
 renderDays(marData,'mar','mar-days');
 renderDays(aprData,'apr','apr-days');
 
-var d1=new Date('2025-12-18'),d2=new Date('2026-02-19'),today=new Date('2026-04-15');
+var d1=new Date('2025-12-18'),d2=new Date('2026-02-19'),today=new Date('2026-04-24');
 document.getElementById('daysBetween').textContent=Math.round((d2-d1)/864e5);
 document.getElementById('daysFree').textContent=Math.round((today-d2)/864e5)+'+';
 document.getElementById('d2delta').textContent=Math.round((d2-d1)/864e5)+' days';
