@@ -176,6 +176,50 @@
   .fav-table tr:hover td{background:rgba(255,255,255,.02);color:var(--text);}
   .fav-note{font-size:11px;color:var(--text3);padding:10px 18px;border-top:1px solid var(--border);line-height:1.6;font-style:italic;}
 
+  /* ===== PROGRESS ===== */
+  .prog-kpi-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:24px;}
+  .prog-kpi{background:var(--card);border:1px solid var(--border);padding:18px 20px;position:relative;overflow:hidden;}
+  .prog-kpi::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
+  .prog-kpi.kpi-teal::before{background:var(--teal);}
+  .prog-kpi.kpi-green::before{background:var(--green);}
+  .prog-kpi.kpi-amber::before{background:var(--amber);}
+  .prog-kpi.kpi-blue::before{background:var(--blue);}
+  .prog-kpi.kpi-red::before{background:var(--red);}
+  .prog-kpi-lbl{font-family:var(--fm);font-size:9px;color:var(--text3);letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;}
+  .prog-kpi-val{font-family:var(--fh);font-size:26px;font-weight:700;line-height:1;}
+  .prog-kpi-sub{font-family:var(--fm);font-size:10px;color:var(--text3);margin-top:5px;}
+  .chart-wrap{background:var(--card);border:1px solid var(--border);padding:20px 24px;margin-bottom:24px;}
+  .chart-title{font-family:var(--fh);font-size:13px;font-weight:600;color:var(--teal);letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;}
+  .month-record{background:var(--card);border:1px solid var(--border);margin-bottom:12px;overflow:hidden;}
+  .month-record-hdr{padding:14px 20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;cursor:pointer;user-select:none;}
+  .month-record-hdr:hover{background:rgba(255,255,255,.02);}
+  .mr-month{font-family:var(--fh);font-size:17px;font-weight:700;letter-spacing:2px;color:var(--text);min-width:120px;}
+  .mr-weight{font-family:var(--fh);font-size:22px;font-weight:700;}
+  .mr-delta{font-family:var(--fm);font-size:11px;padding:3px 9px;border:1px solid;letter-spacing:1px;}
+  .delta-up{color:var(--green);border-color:rgba(34,197,94,.4);background:rgba(34,197,94,.08);}
+  .delta-dn{color:var(--red);border-color:rgba(239,68,68,.4);background:rgba(239,68,68,.08);}
+  .delta-eq{color:var(--text3);border-color:var(--border2);background:transparent;}
+  .delta-na{color:var(--text3);border-color:var(--border);background:transparent;font-style:italic;}
+  .mr-bmi{font-family:var(--fm);font-size:11px;color:var(--text3);margin-left:auto;}
+  .month-record-body{display:none;border-top:1px solid var(--border);padding:18px 20px;}
+  .month-record-body.open{display:block;}
+  .mr-metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:16px;}
+  .mr-metric{background:var(--bg3);border:1px solid var(--border);padding:12px 14px;}
+  .mr-metric-lbl{font-family:var(--fm);font-size:9px;color:var(--text3);letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;}
+  .mr-metric-val{font-size:14px;font-weight:600;color:var(--text);}
+  .bar-wrap{margin-top:6px;height:4px;background:var(--border2);border-radius:2px;overflow:hidden;}
+  .bar-fill{height:100%;border-radius:2px;transition:width .6s ease;}
+  .bar-teal{background:var(--teal);}
+  .bar-green{background:var(--green);}
+  .bar-amber{background:var(--amber);}
+  .bar-red{background:var(--red);}
+  .mr-notes{font-size:13px;color:var(--text2);line-height:1.8;border-top:1px solid var(--border);padding-top:12px;margin-top:4px;}
+  .mr-notes strong{color:var(--text);font-family:var(--fh);font-size:12px;letter-spacing:1px;}
+  .no-data-badge{font-family:var(--fm);font-size:10px;padding:3px 10px;background:rgba(100,116,139,.08);border:1px solid rgba(100,116,139,.2);color:var(--text3);}
+  .prog-legend{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:14px;}
+  .legend-item{display:flex;align-items:center;gap:6px;font-family:var(--fm);font-size:10px;color:var(--text3);}
+  .legend-dot{width:8px;height:8px;border-radius:50%;}
+
   footer{border-top:1px solid var(--border);padding-top:20px;margin-top:40px;text-align:center;}
   footer p{font-family:var(--fm);font-size:10px;color:var(--text3);letter-spacing:2px;}
 </style>
@@ -202,6 +246,7 @@
   <div class="tab" onclick="showTab('journal',this)">Epilepsy Journal</div>
   <div class="tab" onclick="showTab('diet',this)">Diet Tracker</div>
   <div class="tab" onclick="showTab('favorites',this)">Favorites</div>
+  <div class="tab" onclick="showTab('progress',this)">Progress</div>
 </div>
 
 <!-- ========== PROFILE ========== -->
@@ -676,6 +721,37 @@
   </div>
 </div>
 
+<!-- ========== PROGRESS ========== -->
+<div id="sec-progress" class="section">
+  <div class="section-title">Health Progress <span class="tag tag-teal">WEIGHT · BMI · COMPLIANCE</span></div>
+
+  <!-- KPI ROW -->
+  <div class="prog-kpi-row">
+    <div class="prog-kpi kpi-teal">
+      <div class="prog-kpi-lbl">Current Weight</div>
+      <div class="prog-kpi-val" style="color:var(--teal)">58 <span style="font-size:14px;color:var(--text3)">kg</span></div>
+      <div class="prog-kpi-sub">as of Apr 2026</div>
+    </div>
+    <div class="prog-kpi kpi-amber">
+      <div class="prog-kpi-lbl">Target Weight</div>
+      <div class="prog-kpi-val" style="color:var(--amber)">65 <span style="font-size:14px;color:var(--text3)">kg</span></div>
+      <div class="prog-kpi-sub">+7 kg to gain</div>
+    </div>
+    <div class="prog-kpi kpi-amber">
+      <div class="prog-kpi-lbl">Current BMI</div>
+      <div class="prog-kpi-val" style="color:var(--orange)">18.8</div>
+      <div class="prog-kpi-sub">Underweight · target ≥ 20.0</div>
+    </div>
+    <div class="prog-kpi kpi-red">
+      <div class="prog-kpi-lbl">Days Seizure-Free</div>
+      <div class="prog-kpi-val" style="color:var(--green)" id="prog-days-free">—</div>
+      <div class="prog-kpi-sub">since 19 Feb 2026</div>
+    </div>
+  </div>
+
+  <!-- WEIGHT CHART -->
+
+
 <footer>
   <p>CONFIDENTIAL · STEVEN H. TCHAKERIAN · Monitored by Christine Kalaydjian · Kalaydjyan.christine@gmail.com</p>
 </footer>
@@ -883,6 +959,273 @@ var d1=new Date('2025-12-18'),d2=new Date('2026-02-19'),today=new Date('2026-04-
 document.getElementById('daysBetween').textContent=Math.round((d2-d1)/864e5);
 document.getElementById('daysFree').textContent=Math.round((today-d2)/864e5)+'+';
 document.getElementById('d2delta').textContent=Math.round((d2-d1)/864e5)+' days';
+document.getElementById('prog-days-free').textContent=Math.round((today-d2)/864e5)+'+';
+
+/* ============================================================
+   PROGRESS DATA
+   To add a new month, push a new object into progressData.
+   weight: number in kg (null if not yet measured)
+   confirmed: true = actual weigh-in, false = estimated
+   compliance: 0–100 (Depakine adherence %)
+   appetite: 0–100 (how well he ate that month)
+   energy: 0–100 (subjective energy level)
+   seizures: number of seizures that month
+   notes: free text for observations
+============================================================ */
+var HEIGHT_CM = 175.5;
+function calcBMI(w){ return w ? (w/(HEIGHT_CM/100*HEIGHT_CM/100)).toFixed(1) : null; }
+
+var progressData = [
+  {
+    month: 'June 2025',
+    label: 'JUN 2025',
+    weight: null,
+    confirmed: false,
+    compliance: null,
+    appetite: null,
+    energy: null,
+    seizures: 0,
+    notes: 'Lab results from 10 June 2025 (St. Marc Medical Center). No weight recorded at this visit. Neutrophils slightly low (41.9%), lymphocytes mildly elevated — possible post-viral pattern. No seizure events this month.'
+  },
+  {
+    month: 'December 2025',
+    label: 'DEC 2025',
+    weight: null,
+    confirmed: false,
+    compliance: 60,
+    seizures: 1,
+    notes: 'Seizure event on 18 December 2025 — 2 days after a left shoulder dislocation (16 Dec). Physical and psychological stress likely triggered the episode. No weight measured. Compliance estimated as irregular from context.'
+  },
+  {
+    month: 'February 2026',
+    label: 'FEB 2026',
+    weight: null,
+    confirmed: false,
+    compliance: 55,
+    seizures: 1,
+    notes: 'Seizure on 19 Feb followed by severe vomiting, ER admission at 01:21 AM on 20 Feb. IV Depakine administered. CT scan showed mild intestinal stasis. WBC elevated (13,600) — post-seizure stress response. Multiple missed Depakine doses and irregular timing documented.'
+  },
+  {
+    month: 'March 2026',
+    label: 'MAR 2026',
+    weight: null,
+    confirmed: false,
+    compliance: 65,
+    seizures: 0,
+    notes: 'Full month of diet tracking. Depakine taken most evenings but timing often very late (midnight or later). Several days with only one dose recorded. No seizure events.'
+  },
+  {
+    month: 'April 2026',
+    label: 'APR 2026',
+    weight: 58,
+    confirmed: true,
+    compliance: 72,
+    seizures: 0,
+    notes: 'Weight confirmed at 58 kg (BMI 18.8 — underweight). Dietitian visit scheduled 25 April with Jessica R. Attallah. Depakine compliance more consistent — daily morning dose evident. Evening dose still sometimes missed or very late.'
+  }
+];
+
+function toggleMR(id){
+  var b=document.getElementById('mrb-'+id),c=document.getElementById('mrc-'+id);
+  b.classList.toggle('open');c.classList.toggle('open');
+}
+
+function complianceColor(v){
+  if(v===null)return'var(--text3)';
+  if(v>=80)return'var(--green)';
+  if(v>=60)return'var(--amber)';
+  return'var(--red)';
+}
+function complianceBarClass(v){
+  if(v===null)return'bar-teal';
+  if(v>=80)return'bar-green';
+  if(v>=60)return'bar-amber';
+  return'bar-red';
+}
+function bmiColor(b){
+  if(!b)return'var(--text3)';
+  var n=parseFloat(b);
+  if(n<18.5)return'var(--orange)';
+  if(n<25)return'var(--green)';
+  return'var(--amber)';
+}
+
+function renderProgress(){
+  var html='';
+  for(var i=0;i<progressData.length;i++){
+    var d=progressData[i];
+    var prev=null;
+    for(var j=i-1;j>=0;j--){if(progressData[j].weight){prev=progressData[j];break;}}
+    var delta='';
+    var deltaClass='delta-na';
+    var deltaText='No prior weight';
+    if(d.weight && prev && prev.weight){
+      var diff=(d.weight-prev.weight).toFixed(1);
+      if(diff>0){delta='+'+diff+' kg';deltaClass='delta-up';}
+      else if(diff<0){delta=diff+' kg';deltaClass='delta-dn';}
+      else{delta='No change';deltaClass='delta-eq';}
+      deltaText=delta;
+    } else if(!d.weight){
+      deltaText='Weight not recorded';
+    }
+    var bmi=calcBMI(d.weight);
+    var weightDisplay=d.weight?d.weight+' kg':'—';
+    var weightColor=d.weight?(d.confirmed?'var(--teal)':'var(--text3)'):'var(--text3)';
+
+    html+='<div class="month-record">';
+    html+='<div class="month-record-hdr" onclick="toggleMR(\''+i+'\')">';
+    html+='<span class="mr-month">'+d.label+'</span>';
+    html+='<span class="mr-weight" style="color:'+weightColor+'">'+weightDisplay+'</span>';
+    if(!d.confirmed&&d.weight){html+='<span class="no-data-badge" style="margin-left:4px;">est.</span>';}
+    html+='<span class="mr-delta '+deltaClass+'">'+deltaText+'</span>';
+    if(d.seizures>0){html+='<span style="font-family:var(--fm);font-size:10px;padding:3px 9px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);color:var(--red);">⚡ '+d.seizures+' seizure'+(d.seizures>1?'s':'')+'</span>';}
+    else{html+='<span style="font-family:var(--fm);font-size:10px;padding:3px 9px;background:rgba(34,197,94,.07);border:1px solid rgba(34,197,94,.2);color:var(--green);">✓ seizure-free</span>';}
+    if(bmi){html+='<span class="mr-bmi" style="color:'+bmiColor(bmi)+'">BMI '+bmi+'</span>';}
+    html+='<span class="chevron" id="mrc-'+i+'">▾</span>';
+    html+='</div>';
+
+    html+='<div class="month-record-body" id="mrb-'+i+'">';
+    html+='<div class="mr-metrics">';
+
+    // Weight
+    html+='<div class="mr-metric">';
+    html+='<div class="mr-metric-lbl">Weight</div>';
+    html+='<div class="mr-metric-val" style="color:'+weightColor+'">'+(d.weight?d.weight+' kg':'Not measured')+'</div>';
+    if(d.weight){
+      html+='<div class="bar-wrap"><div class="bar-fill bar-teal" style="width:'+Math.min(100,(d.weight/65*100))+'%"></div></div>';
+      html+='<div style="font-family:var(--fm);font-size:9px;color:var(--text3);margin-top:4px;">Goal: 65 kg</div>';
+    }
+    html+='</div>';
+
+    // BMI
+    html+='<div class="mr-metric">';
+    html+='<div class="mr-metric-lbl">BMI</div>';
+    html+='<div class="mr-metric-val" style="color:'+(bmi?bmiColor(bmi):'var(--text3)')+'">'+(bmi||'—')+'</div>';
+    if(bmi){
+      html+='<div class="bar-wrap"><div class="bar-fill '+(parseFloat(bmi)<18.5?'bar-amber':'bar-green')+'" style="width:'+Math.min(100,(parseFloat(bmi)/25*100))+'%"></div></div>';
+      html+='<div style="font-family:var(--fm);font-size:9px;color:var(--text3);margin-top:4px;">'+(parseFloat(bmi)<18.5?'Underweight':'Normal range')+'</div>';
+    }
+    html+='</div>';
+
+    // Depakine compliance
+    html+='<div class="mr-metric">';
+    html+='<div class="mr-metric-lbl">Depakine Compliance</div>';
+    html+='<div class="mr-metric-val" style="color:'+complianceColor(d.compliance)+'">'+(d.compliance!==null?d.compliance+'%':'N/A')+'</div>';
+    if(d.compliance!==null){
+      html+='<div class="bar-wrap"><div class="bar-fill '+complianceBarClass(d.compliance)+'" style="width:'+d.compliance+'%"></div></div>';
+      html+='<div style="font-family:var(--fm);font-size:9px;color:var(--text3);margin-top:4px;">'+(d.compliance>=80?'Good':'Needs improvement')+'</div>';
+    }
+    html+='</div>';
+
+    // Seizures
+    html+='<div class="mr-metric">';
+    html+='<div class="mr-metric-lbl">Seizure Events</div>';
+    html+='<div class="mr-metric-val" style="color:'+(d.seizures>0?'var(--red)':'var(--green)')+'">'+(d.seizures>0?d.seizures+' event'+(d.seizures>1?'s':''):'None')+'</div>';
+    html+='</div>';
+
+    html+='</div>'; // end mr-metrics
+
+    // Notes
+    if(d.notes){
+      html+='<div class="mr-notes"><strong>NOTES</strong><br>'+d.notes+'</div>';
+    }
+
+    html+='</div>'; // end body
+    html+='</div>'; // end month-record
+  }
+  document.getElementById('progress-months').innerHTML=html;
+}
+renderProgress();
+
+/* ===== WEIGHT CHART (SVG) ===== */
+(function(){
+  var svgEl=document.getElementById('weight-chart');
+  if(!svgEl)return;
+
+  var W=900,H=220,padL=52,padR=20,padT=20,padB=40;
+  var plotW=W-padL-padR,plotH=H-padT-padB;
+
+  // Build x points (months)
+  var labels=['Jun 2025','Dec 2025','Feb 2026','Mar 2026','Apr 2026'];
+  var weights=progressData.map(function(d){return d.weight;});
+  var confirmed=progressData.map(function(d){return d.confirmed;});
+  var seizureMonths=progressData.map(function(d){return d.seizures>0;});
+  var n=labels.length;
+
+  // Y axis: 50–70 kg range
+  var yMin=50,yMax=70;
+  function yPx(kg){return padT+plotH-(((kg-yMin)/(yMax-yMin))*plotH);}
+  function xPx(i){return padL+(i/(n-1))*plotW;}
+
+  // Target line y (BMI 20 = 61.6 kg for 175.5cm)
+  var targetKg=61.6;
+
+  var svg='';
+
+  // Grid lines
+  for(var kg=50;kg<=70;kg+=5){
+    var y=yPx(kg);
+    svg+='<line x1="'+padL+'" y1="'+y+'" x2="'+(W-padR)+'" y2="'+y+'" stroke="rgba(30,45,74,0.8)" stroke-width="1"/>';
+    svg+='<text x="'+(padL-6)+'" y="'+(y+4)+'" font-family="Share Tech Mono,monospace" font-size="10" fill="#64748b" text-anchor="end">'+kg+'</text>';
+  }
+
+  // Target line (BMI 20)
+  var ty=yPx(targetKg);
+  svg+='<line x1="'+padL+'" y1="'+ty+'" x2="'+(W-padR)+'" y2="'+ty+'" stroke="rgba(245,158,11,0.4)" stroke-width="1" stroke-dasharray="6,4"/>';
+  svg+='<text x="'+(W-padR+4)+'" y="'+(ty+4)+'" font-family="Share Tech Mono,monospace" font-size="9" fill="rgba(245,158,11,0.7)">BMI 20</text>';
+
+  // Seizure event vertical bands
+  for(var i=0;i<n;i++){
+    if(seizureMonths[i]){
+      svg+='<rect x="'+(xPx(i)-18)+'" y="'+padT+'" width="36" height="'+plotH+'" fill="rgba(239,68,68,0.06)"/>';
+      svg+='<line x1="'+xPx(i)+'" y1="'+padT+'" x2="'+xPx(i)+'" y2="'+(padT+plotH)+'" stroke="rgba(239,68,68,0.3)" stroke-width="1" stroke-dasharray="3,3"/>';
+    }
+  }
+
+  // Connect known weights with dashed/solid line
+  var knownPoints=[];
+  for(var i=0;i<n;i++){
+    if(weights[i]!==null){knownPoints.push({x:xPx(i),y:yPx(weights[i]),confirmed:confirmed[i],idx:i});}
+  }
+  // Draw line segments between known points
+  for(var k=0;k<knownPoints.length-1;k++){
+    var p1=knownPoints[k],p2=knownPoints[k+1];
+    svg+='<line x1="'+p1.x+'" y1="'+p1.y+'" x2="'+p2.x+'" y2="'+p2.y+'" stroke="rgba(0,212,170,0.5)" stroke-width="2" stroke-dasharray="5,4"/>';
+  }
+
+  // X axis labels & vertical grid
+  for(var i=0;i<n;i++){
+    var x=xPx(i);
+    svg+='<line x1="'+x+'" y1="'+padT+'" x2="'+x+'" y2="'+(padT+plotH)+'" stroke="rgba(30,45,74,0.4)" stroke-width="1"/>';
+    svg+='<text x="'+x+'" y="'+(padT+plotH+16)+'" font-family="Share Tech Mono,monospace" font-size="9" fill="#64748b" text-anchor="middle">'+labels[i]+'</text>';
+  }
+
+  // Plot points
+  for(var i=0;i<n;i++){
+    var x=xPx(i);
+    // Seizure marker
+    if(seizureMonths[i]){
+      svg+='<text x="'+x+'" y="'+(padT+12)+'" font-size="12" text-anchor="middle" fill="rgba(239,68,68,0.9)">⚡</text>';
+    }
+    if(weights[i]!==null){
+      var y=yPx(weights[i]);
+      var col=confirmed[i]?'#00d4aa':'rgba(0,212,170,0.45)';
+      var stroke=confirmed[i]?'rgba(0,212,170,0.4)':'rgba(0,212,170,0.2)';
+      svg+='<circle cx="'+x+'" cy="'+y+'" r="'+(confirmed[i]?7:5)+'" fill="'+col+'" stroke="'+stroke+'" stroke-width="'+(confirmed[i]?2:1)+'"/>';
+      svg+='<text x="'+x+'" y="'+(y-12)+'" font-family="Rajdhani,sans-serif" font-size="13" font-weight="700" fill="'+(confirmed[i]?'#00d4aa':'#94a3b8')+'" text-anchor="middle">'+weights[i]+'</text>';
+    } else {
+      // No weight — show question mark
+      var midY=padT+plotH/2;
+      svg+='<text x="'+x+'" y="'+(midY+5)+'" font-family="Share Tech Mono,monospace" font-size="13" fill="rgba(100,116,139,0.5)" text-anchor="middle">?</text>';
+    }
+  }
+
+  // Axes
+  svg+='<line x1="'+padL+'" y1="'+padT+'" x2="'+padL+'" y2="'+(padT+plotH)+'" stroke="#1e2d4a" stroke-width="1.5"/>';
+  svg+='<line x1="'+padL+'" y1="'+(padT+plotH)+'" x2="'+(W-padR)+'" y2="'+(padT+plotH)+'" stroke="#1e2d4a" stroke-width="1.5"/>';
+
+  svgEl.innerHTML=svg;
+})();
 </script>
 </body>
 </html>
