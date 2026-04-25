@@ -712,6 +712,43 @@
 <!-- ========== DIETITIAN ========== -->
 <div id="sec-dietitian" class="section">
   <div class="section-title">Dietitian Visits <span class="tag tag-green">Jessica R. Attallah</span></div>
+
+  <div style="font-family:var(--fm);font-size:11px;color:var(--text3);margin-bottom:20px;padding:10px 16px;background:rgba(34,197,94,.04);border:1px solid rgba(34,197,94,.15);border-left:3px solid var(--green);">
+    Dietitian: Jessica R. Attallah · Program Goal: Weight Gain +10.7 kg over 12 weeks · Rate: 0.5 kg/week
+  </div>
+
+  <!-- VISIT 1 -->
+  <div class="dv-entry">
+    <div class="dv-hdr" onclick="toggleDV('dv1')">
+      <div class="dv-visit-num">VISIT 1</div>
+      <div>
+        <div class="dv-visit-date">25 April 2026</div>
+        <div style="font-family:var(--fm);font-size:10px;color:var(--teal);margin-top:2px;">Body composition test · Medical history · Blood test orders · Family history</div>
+      </div>
+      <span class="tag tag-green" style="margin-left:auto;">COMPLETED</span>
+      <span class="chevron" id="dvchev-dv1">▾</span>
+    </div>
+    <div class="dv-body" id="dvbody-dv1">
+
+      <!-- Medical History Q&A -->
+      <div class="dv-sub-title">Medical History — Questions &amp; Answers</div>
+      <div class="qa-item">
+        <div class="qa-q">When was the first time you had epilepsy?</div>
+        <div class="qa-a">Diagnosed at age 9. Had an incident where a bookshelf fell on his head. Doctors analysed and found issues with nerves in his brain. Took Depakine for 1 year initially.</div>
+      </div>
+      <div class="qa-item">
+        <div class="qa-q">Any surgeries done before?</div>
+        <div class="qa-a">
+          <strong style="color:var(--text);">1. Appendix surgery</strong> — Was feeling nauseous and vomiting. Doctors concluded his appendix was the cause. After removal, never had issues again. No specific post-surgical diet was required.<br>
+          <span style="color:var(--text3);font-family:var(--fm);font-size:10px;">Age at surgery: ~16–17 years old</span><br><br>
+          <strong style="color:var(--text);">2. Leg surgery</strong> — Got into an accident and injured his leg. Surgical intervention was required.
+        </div>
+      </div>
+      <div class="qa-item">
+        <div class="qa-q">When they removed your appendix, was there a specific diet to follow?</div>
+        <div class="qa-a">No — patient answered no specific diet was required post-appendix surgery.</div>
+      </div>
+
       <!-- Body Composition -->
       <div class="dv-sub-title">ACCUNIQ Body Composition Report (BC360) — 25 Apr 2026 · 5:05 PM</div>
       <div style="font-family:var(--fm);font-size:10px;color:var(--text3);margin-bottom:12px;">ID: 162 · Steven Tchakarian · Height 175.8 cm · Age 23 · Male</div>
@@ -826,15 +863,325 @@
     </div>
   </div>
 
-  <!-- VISIT 2 — UPCOMING -->
-  <div class="dv-entry dv-upcoming">
-    <div class="dv-hdr">
-      <div class="dv-visit-num" style="color:var(--text3);">VISIT 2</div>
+  <!-- VISIT 2 — PRE-VISIT VIDEO MATERIALS -->
+  <div class="dv-entry">
+    <div class="dv-hdr" onclick="toggleDV('dv2')">
+      <div class="dv-visit-num">VISIT 2</div>
       <div>
-        <div class="dv-visit-date" style="color:var(--text3);">2 May 2026</div>
-        <div style="font-family:var(--fm);font-size:10px;color:var(--text3);margin-top:2px;">Next scheduled appointment · Notes will be added after the visit</div>
+        <div class="dv-visit-date">2 May 2026</div>
+        <div style="font-family:var(--fm);font-size:10px;color:var(--amber);margin-top:2px;">Pre-visit video by Jessica R. Attallah — Healthy Lifestyle &amp; Portion Guide</div>
       </div>
-      <span class="tag" style="margin-left:auto;border-color:var(--border2);color:var(--text3);background:transparent;">UPCOMING</span>
+      <span class="tag tag-amber" style="margin-left:auto;">UPCOMING · VIDEO SUMMARY</span>
+      <span class="chevron" id="dvchev-dv2">▾</span>
+    </div>
+    <div class="dv-body" id="dvbody-dv2">
+
+      <div style="background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.2);border-left:3px solid var(--amber);padding:12px 16px;margin-bottom:18px;font-size:13px;color:var(--text2);line-height:1.8;">
+        📹 Jessica sent a video to watch before the next visit. Summary below — covers lifestyle habits, how to read portions, meal structure, and Lebanese dish guides.
+        <br><em style="color:var(--text3);font-size:11px;">This is not a strict diet — it is a healthy lifestyle. You can still enjoy your favorite foods in moderation.</em>
+      </div>
+
+      <!-- SECTION 1: HEALTHY LIFESTYLE TIPS -->
+      <div class="dv-sub-title">💡 10 Healthy Lifestyle Changes — General Tips</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px;margin-bottom:16px;">
+        <div class="bc-item">
+          <div class="bc-lbl">1 · Adequate Sleep</div>
+          <div class="bc-val" style="color:var(--teal);font-size:13px;">Sleep 8–9 hours per night</div>
+        </div>
+        <div class="bc-item">
+          <div class="bc-lbl">2 · Adequate Water Intake</div>
+          <div class="bc-val" style="color:var(--teal);font-size:13px;">Drink 2 liters of water per day</div>
+        </div>
+        <div class="bc-item">
+          <div class="bc-lbl">3 · Eat &amp; Chew Slowly</div>
+          <div class="bc-val" style="color:var(--teal);font-size:13px;">No eating in front of TV/screen. Enjoy &amp; chew well.</div>
+        </div>
+        <div class="bc-item">
+          <div class="bc-lbl">4 · Manage Stress</div>
+          <div class="bc-val" style="color:var(--teal);font-size:13px;">Hobbies, prayer, meditation, talk to someone you trust</div>
+        </div>
+        <div class="bc-item">
+          <div class="bc-lbl">5 · Exercise Regularly</div>
+          <div class="bc-val" style="color:var(--teal);font-size:13px;">Physical activity at least 3× per week (walking, swimming…)</div>
+        </div>
+        <div class="bc-item">
+          <div class="bc-lbl">6 · Do NOT Skip Meals</div>
+          <div class="bc-val" style="color:var(--red);font-size:13px;">Skipping meals leads to overeating later &amp; slows metabolism</div>
+        </div>
+        <div class="bc-item">
+          <div class="bc-lbl">7 · Bread Choice</div>
+          <div class="bc-val" style="color:var(--teal);font-size:13px;">Prefer <strong>Whole Wheat or Oat Bread</strong> (Moulin d'Or or Al-Chayeb)</div>
+        </div>
+        <div class="bc-item">
+          <div class="bc-lbl">8 · Salad with Every Lunch</div>
+          <div class="bc-val" style="color:var(--teal);font-size:13px;">1 tsp olive oil · Avoid starchy veggies daily · Healthy dressings</div>
+        </div>
+        <div class="bc-item">
+          <div class="bc-lbl">9 · Animal-Based Food Choices</div>
+          <div class="bc-val" style="color:var(--teal);font-size:13px;">Very lean meat · Skinless chicken breast · Full-fat yogurt/laban · Diet mayo instead of regular</div>
+        </div>
+        <div class="bc-item">
+          <div class="bc-lbl">10 · Mindful of Oil</div>
+          <div class="bc-val" style="color:var(--teal);font-size:13px;">Max 2 tsp oil per dish · Olive oil preferred · Grill instead of fry</div>
+        </div>
+      </div>
+
+      <!-- SECTION 2: PORTION GUIDE -->
+      <div class="dv-sub-title">⚖️ Portion Size Guide — 1 Portion Equals…</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;margin-bottom:16px;">
+
+        <!-- CARBS -->
+        <div style="background:var(--bg3);border:1px solid rgba(245,158,11,.3);padding:14px 18px;">
+          <div style="font-family:var(--fh);font-size:13px;font-weight:700;color:var(--amber);letter-spacing:1px;margin-bottom:10px;border-bottom:1px solid rgba(245,158,11,.2);padding-bottom:6px;">🍞 CARBOHYDRATES — 1 portion =</div>
+          <div style="font-size:12px;color:var(--text2);line-height:2;">
+            · 1 small whole wheat/bran/oat bread (abaa)<br>
+            · ½ large OR 1 small abaa White/Brown Arabic Bread<br>
+            · ½ French Bread ("Franjé")<br>
+            · ½ Saj bread (without edges)<br>
+            · 1 small OR ¼ large potato<br>
+            · ⅓ cup cooked pasta<br>
+            · ⅓ cup cooked rice<br>
+            · 1 Pain au Lait<br>
+            · 2 Rice Cakes<br>
+            · 1 cup cooked beetroot<br>
+            · ¾ cup unsweetened OR ½ cup sweetened cornflakes<br>
+            · 3 cups popcorn (no oil)<br>
+            · ½ cup cooked chickpeas / lupine / beans / peas
+          </div>
+        </div>
+
+        <!-- PROTEINS -->
+        <div style="background:var(--bg3);border:1px solid rgba(0,212,170,.3);padding:14px 18px;">
+          <div style="font-family:var(--fh);font-size:13px;font-weight:700;color:var(--teal);letter-spacing:1px;margin-bottom:10px;border-bottom:1px solid rgba(0,212,170,.2);padding-bottom:6px;">💪 PROTEINS — 1 portion =</div>
+          <div style="font-size:12px;color:var(--text2);line-height:2;">
+            · 2 Tbsp Labneh<br>
+            · 1 slice (finger-sized) Cheese: Feta / Halloumi Diet / Akkawi / Parmesan / Majdoulé<br>
+            · 2 slices Diet Mozzarella (Brand: "Moni")<br>
+            · 1 cup Laban (Yogurt) OR Greek Yogurt OR Milk<br>
+            · 30g Tuna / Sardines / Crab / Meat / Chicken<br>
+            · 1 egg (×2 if egg whites only, no yolk)<br>
+            · 1 Tbsp Thyme (Zaatar Halabi)<br>
+            · 1½ Tbsp Hommos Mtabbal (hummus with tahini)<br>
+            <span style="color:var(--text3);font-size:11px;font-style:italic;">⚠ Limit: Halloumi, Swiss, Kiri, Picon, Cheddar, Boursin, Sour Cream, Pepperoni</span>
+          </div>
+        </div>
+
+        <!-- FATS -->
+        <div style="background:var(--bg3);border:1px solid rgba(34,197,94,.3);padding:14px 18px;">
+          <div style="font-family:var(--fh);font-size:13px;font-weight:700;color:var(--green);letter-spacing:1px;margin-bottom:10px;border-bottom:1px solid rgba(34,197,94,.2);padding-bottom:6px;">🫒 FATS — 1 portion =</div>
+          <div style="font-size:12px;color:var(--text2);line-height:2;">
+            · 8 Olives (Omega-3)<br>
+            · 1 tsp Olive Oil (Omega-3)<br>
+            · ¼ medium Avocado (Omega-3)<br>
+            · 2 Walnuts (Omega-3)<br>
+            · 6 Almonds<br>
+            · 6 Cashews · 16 Pistachios · 5 Hazelnuts<br>
+            · 10 Peanuts<br>
+            · 1 tsp Peanut Butter<br>
+            · 2 tsp Chia seeds<br>
+            · 1 tsp Butter OR Vegetable Oil<br>
+            · 3 tsp Diet Mayo OR 1 tsp Regular Mayo<br>
+            · 2 tsp Tahini<br>
+            · 1 Tbsp Flaxseeds
+          </div>
+        </div>
+
+        <!-- FRUITS -->
+        <div style="background:var(--bg3);border:1px solid rgba(168,85,247,.3);padding:14px 18px;">
+          <div style="font-family:var(--fh);font-size:13px;font-weight:700;color:var(--purple);letter-spacing:1px;margin-bottom:10px;border-bottom:1px solid rgba(168,85,247,.2);padding-bottom:6px;">🍎 FRUITS — 1 portion =</div>
+          <div style="font-size:12px;color:var(--text2);line-height:2;">
+            · 1 medium Apple / Kiwi<br>
+            · 1 large Pear (إجاص)<br>
+            · ½ large Mango<br>
+            · 1 medium Banana (موز)<br>
+            · 1 cup Pineapple (أناناس)<br>
+            · 1 cup Strawberries (فريز)<br>
+            · 15 Grapes (عنب)<br>
+            · 15 Cherries (كرز)<br>
+            · 2 Figs (تين)<br>
+            · ½ Grapefruit<br>
+            · 2 medium Slices Watermelon<br>
+            · 4 Dates (بلح)<br>
+            · 3 small Peaches (خوخ)
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION 3: SNACK IDEAS -->
+      <div class="dv-sub-title">🍫 Snack Ideas (PM)</div>
+      <div style="background:var(--bg3);border:1px solid var(--border);padding:14px 18px;margin-bottom:16px;">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:6px;">
+          <div style="font-size:12px;color:var(--text2);padding:5px 0;border-bottom:1px solid rgba(30,45,74,.4);">🍎 1 Fruit + 1 Fat or vegetables (carrot/cucumber/cauliflower/broccoli…)</div>
+          <div style="font-size:12px;color:var(--text2);padding:5px 0;border-bottom:1px solid rgba(30,45,74,.4);">🥦 Vegetables + ½ cup Hommos Mtabbal or Labneh (minted or garlic)</div>
+          <div style="font-size:12px;color:var(--text2);padding:5px 0;border-bottom:1px solid rgba(30,45,74,.4);">🍟 Healthy Chips: ½ sweet potato + 1 fat (tahini) OR baked potato + Mozzarella Moni</div>
+          <div style="font-size:12px;color:var(--text2);padding:5px 0;border-bottom:1px solid rgba(30,45,74,.4);">🫐 3 cups Popcorn (small amount of oil)</div>
+          <div style="font-size:12px;color:var(--text2);padding:5px 0;border-bottom:1px solid rgba(30,45,74,.4);">🫘 ½ cup Chickpeas (roasted with spices) OR ½ cup Lupin Beans (Termos)</div>
+          <div style="font-size:12px;color:var(--text2);padding:5px 0;border-bottom:1px solid rgba(30,45,74,.4);">🥛 1 cup Laban Ayran (diet) OR Hot Chocolate (1 cup milk + 1 tsp cocoa)</div>
+          <div style="font-size:12px;color:var(--text2);padding:5px 0;border-bottom:1px solid rgba(30,45,74,.4);">🥑 ½ medium Avocado + 1 tsp Honey OR Dried Berries + ½ Avocado</div>
+          <div style="font-size:12px;color:var(--text2);padding:5px 0;border-bottom:1px solid rgba(30,45,74,.4);">🍫 20g Dark Chocolate (70% minimum) OR Kitkat 2 fingers / Snack / Nouba</div>
+          <div style="font-size:12px;color:var(--text2);padding:5px 0;">🍪 1 "Ghandour 555" biscuit + 1 tsp dark choco spread + 1 fat (peanut butter/tahini)</div>
+        </div>
+      </div>
+
+      <!-- SECTION 4: MEAL COMPOSITION -->
+      <div class="dv-sub-title">🍽️ How to Build Your Meals — Lunch/Dinner Reference</div>
+      <div style="overflow-x:auto;margin-bottom:16px;">
+        <table style="width:100%;border-collapse:collapse;font-size:12px;">
+          <thead>
+            <tr>
+              <th style="background:rgba(245,158,11,.15);color:var(--amber);font-family:var(--fh);letter-spacing:1px;padding:10px 12px;text-align:left;border-bottom:1px solid var(--border2);">🍞 CARBS</th>
+              <th style="background:rgba(0,212,170,.12);color:var(--teal);font-family:var(--fh);letter-spacing:1px;padding:10px 12px;text-align:left;border-bottom:1px solid var(--border2);">💪 PROTEINS</th>
+              <th style="background:rgba(34,197,94,.12);color:var(--green);font-family:var(--fh);letter-spacing:1px;padding:10px 12px;text-align:left;border-bottom:1px solid var(--border2);">🫒 FATS</th>
+              <th style="background:rgba(59,130,246,.12);color:var(--blue);font-family:var(--fh);letter-spacing:1px;padding:10px 12px;text-align:left;border-bottom:1px solid var(--border2);">🥦 VEGETABLES</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding:10px 12px;color:var(--text2);border-bottom:1px solid rgba(30,45,74,.4);vertical-align:top;line-height:1.8;">
+                Bread · ½ cup Pasta · ½ cup Rice · ½ cup Corn · ½ cup Orzo · 1 small potato · ½ cup Rico · 1 crouton / pain de mie · 1 small whole wheat bread · ⅓ cup Quinoa
+              </td>
+              <td style="padding:10px 12px;color:var(--text2);border-bottom:1px solid rgba(30,45,74,.4);vertical-align:top;line-height:1.8;">
+                Labneh (2 Tbsp) · White cheese (1 slice) · Mozzarella Moni (2 slices) · 1 egg · ½ tuna can · ¼ chicken breast (30g) · 30g lean meat · Laban 0% · Greek yogurt · 1 cup milk
+              </td>
+              <td style="padding:10px 12px;color:var(--text2);border-bottom:1px solid rgba(30,45,74,.4);vertical-align:top;line-height:1.8;">
+                1 tsp olive oil · 10 olives · ¼ avocado · 1 tsp zaatar · Nuts
+              </td>
+              <td style="padding:10px 12px;color:var(--text2);border-bottom:1px solid rgba(30,45,74,.4);vertical-align:top;line-height:1.8;">
+                Tomato · Cucumber · Mint · Rocca · Lettuce · Basil · Kale · Onion · Broccoli · Carrot (shredded) · Beetroot · Tabboule · Fattouch
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- SECTION 5: MEAL PLAN -->
+      <div class="dv-sub-title">📅 Daily Meal Structure</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;margin-bottom:16px;">
+
+        <!-- Normal Day -->
+        <div style="background:var(--bg3);border:1px solid var(--border);padding:14px 18px;">
+          <div style="font-family:var(--fh);font-size:13px;font-weight:700;color:var(--teal);letter-spacing:1px;margin-bottom:12px;padding-bottom:6px;border-bottom:1px solid var(--border);">☀️ NORMAL DAY</div>
+          <div class="timeline-bar">
+            <div class="tl-item"><div class="tl-date">Wake-up · 8:30–9:00 AM</div>–</div>
+            <div class="tl-item tl-hi"><div class="tl-date">Breakfast 1 · 9:30 AM</div>
+              Sandwich: 1 whole wheat bread or Saj · 2 protein options (Labneh/White Cheese/Eggs) · Vegetables (lettuce, cucumber, mint, rocca, tomato) · 1 Fat (1 tsp olive oil or 8 olives)
+            </div>
+            <div class="tl-item"><div class="tl-date">Snack · 11:30–12:00</div>2 Fats + 1 Fruit</div>
+            <div class="tl-item tl-hi"><div class="tl-date">Lunch · 1:30–2:00 PM</div>Salad (Green/Tabbouleh/Fattoush + 1 tsp olive oil) + Main Dish</div>
+            <div class="tl-item"><div class="tl-date">Snack · 4:30–5:00 PM</div>1 option from snack table (sweet or salty)</div>
+            <div class="tl-item tl-hi"><div class="tl-date">Dinner · 7:00–7:30 PM</div>
+              <strong>Option A – Sandwich:</strong> 1–2 whole wheat bread · 2–3 proteins · Vegetables + 1 Fruit<br>
+              <strong>Option B – Platter:</strong> 3–4 Proteins (Chicken/Fish/Tuna/Eggs) · 2 Carbs · Cooked Vegetables<br>
+              <strong>Option C – Salad:</strong> 2 Carbs · 2–3 Proteins · Dressing (1 tsp olive oil) + 1 Fruit
+            </div>
+          </div>
+        </div>
+
+        <!-- Workout Day -->
+        <div style="background:var(--bg3);border:1px solid rgba(168,85,247,.3);padding:14px 18px;">
+          <div style="font-family:var(--fh);font-size:13px;font-weight:700;color:var(--purple);letter-spacing:1px;margin-bottom:12px;padding-bottom:6px;border-bottom:1px solid rgba(168,85,247,.2);">🏋️ WORKOUT DAY (PM workout)</div>
+          <div class="timeline-bar">
+            <div class="tl-item"><div class="tl-date">Breakfast · 9:30 AM</div>Same as normal day (1 whole wheat bread, 2–3 proteins, vegetables, 1 fat)</div>
+            <div class="tl-item"><div class="tl-date">Snack · 11:30–12:00</div>2 Fats + 1 Fruit</div>
+            <div class="tl-item"><div class="tl-date">Lunch · 1:30–2:00 PM</div>Salad + Main Dish</div>
+            <div class="tl-item"><div class="tl-date">Snack · 4:30–5:00 PM</div>1 option (sweet or salty)</div>
+            <div class="tl-item tl-hi"><div class="tl-date">Pre-Workout Dinner · 6:30 PM</div>1 Whole Wheat Bread + 2 proteins (Labneh/White Cheese/Eggs/Halloumi) OR 1 cup roasted chickpeas + 1 Fruit</div>
+            <div class="tl-item"><div class="tl-date">Workout · 7:00–8:30 PM</div>—</div>
+            <div class="tl-item tl-hi"><div class="tl-date">Post-Workout Dinner · 8:30–9:00 PM</div>4 Proteins · 2 Carbs · NO FAT. Options: Platter (chicken/fish/tuna/eggs) OR Sandwich (1–2) · + 1 Fruit</div>
+          </div>
+          <div style="margin-top:10px;font-size:11px;color:var(--text3);background:rgba(239,68,68,.06);border-left:2px solid var(--red);padding:6px 10px;">⚠ NO FAT in the 2 hours after workout</div>
+        </div>
+      </div>
+
+      <!-- PRE & POST WORKOUT OPTIONS -->
+      <div class="dv-sub-title">🏃 Pre &amp; Post Workout Options</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;">
+        <div style="background:rgba(0,184,212,.05);border:1px solid rgba(0,184,212,.2);padding:12px 16px;">
+          <div style="font-family:var(--fh);font-size:12px;color:var(--cyan);letter-spacing:1px;margin-bottom:8px;">PRE-WORKOUT SNACK</div>
+          <div style="font-size:12px;color:var(--text2);line-height:1.9;">
+            · 1 Fruit + 1 Fat (nuts / ¼ avocado / 1 tbsp peanut butter)<br>
+            · Dark Chocolate 70% (20g) + 1 Fat (nuts)<br>
+            · Hot Chocolate or Milkshake (0% fat + unsweetened cocoa)<br>
+            · Laban Ayran (0% fat)<br>
+            · ½ cup chickpeas OR ½ cup lupine (termos)<br>
+            · ½ cup hummus bi tahini + raw vegetables<br>
+            · 3 tbsp labneh + raw vegetables + 1 fruit<br>
+            · Healthy chips: baked sweet potato + ½ cup hummus
+          </div>
+        </div>
+        <div style="background:rgba(168,85,247,.05);border:1px solid rgba(168,85,247,.2);padding:12px 16px;">
+          <div style="font-family:var(--fh);font-size:12px;color:var(--purple);letter-spacing:1px;margin-bottom:8px;">POST-WORKOUT MEAL (4 proteins, 2 carbs, NO fat)</div>
+          <div style="font-size:12px;color:var(--text2);line-height:1.9;">
+            <strong style="color:var(--text);">Carbs (2–3):</strong> 3 bread (small) / 1 cup pasta or rice / 3 small baked potatoes / 5 tbsp hummus bi tahini<br><br>
+            <strong style="color:var(--text);">Protein (4):</strong><br>
+            · Cheese: Halloumi diet / Akkawi / Mozzarella Moni<br>
+            · 1 Chicken Breast (120g)<br>
+            · 1 can Tuna (130g drained) OR 2 cans Sardine<br>
+            · 5 Kafta pieces<br>
+            · 1 Burger (ham) OR lean meat 200g<br>
+            · 4 egg whites (boiled or omelette)
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION 6: LEBANESE DISH PORTIONS -->
+      <div class="dv-sub-title">🍲 Lebanese Dish Portion Guide</div>
+      <div style="overflow-x:auto;margin-bottom:16px;">
+        <table style="width:100%;border-collapse:collapse;font-size:12px;">
+          <thead>
+            <tr style="background:rgba(59,130,246,.1);">
+              <th style="color:var(--blue);font-family:var(--fh);letter-spacing:1px;padding:8px 12px;text-align:left;border-bottom:1px solid var(--border2);">DISH</th>
+              <th style="color:var(--blue);font-family:var(--fh);letter-spacing:1px;padding:8px 12px;text-align:left;border-bottom:1px solid var(--border2);">PORTION</th>
+              <th style="color:var(--blue);font-family:var(--fh);letter-spacing:1px;padding:8px 12px;text-align:left;border-bottom:1px solid var(--border2);">WITH</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid rgba(30,45,74,.5);"><td style="padding:7px 12px;color:var(--text2);">Chicken/Beef Stroganoff</td><td style="padding:7px 12px;color:var(--text);">1 cup chicken or beef + 1 cup rice</td><td style="padding:7px 12px;color:var(--text3);">—</td></tr>
+            <tr style="border-bottom:1px solid rgba(30,45,74,.5);background:rgba(255,255,255,.01);"><td style="padding:7px 12px;color:var(--text2);">Rez Aa Djej</td><td style="padding:7px 12px;color:var(--text);">2 cup rice + 1 cup chicken</td><td style="padding:7px 12px;color:var(--text3);">2 Tbsp roasted nuts</td></tr>
+            <tr style="border-bottom:1px solid rgba(30,45,74,.5);"><td style="padding:7px 12px;color:var(--text2);">Siyadiyye</td><td style="padding:7px 12px;color:var(--text);">2 cup rice + 1 cup fish</td><td style="padding:7px 12px;color:var(--text3);">2 Tbsp roasted nuts</td></tr>
+            <tr style="border-bottom:1px solid rgba(30,45,74,.5);background:rgba(255,255,255,.01);"><td style="padding:7px 12px;color:var(--text2);">Kafta w Batata</td><td style="padding:7px 12px;color:var(--text);">5 medium kafta + 4 large potato pieces</td><td style="padding:7px 12px;color:var(--text3);">2 bread + ½ rice OR 3 bread</td></tr>
+            <tr style="border-bottom:1px solid rgba(30,45,74,.5);"><td style="padding:7px 12px;color:var(--text2);">Tawouk (Grilled)</td><td style="padding:7px 12px;color:var(--text);">15 pieces = 3 skewers + 2 small potatoes or 15 fries</td><td style="padding:7px 12px;color:var(--text3);">2 bread + 2 tsp garlic sauce</td></tr>
+            <tr style="border-bottom:1px solid rgba(30,45,74,.5);background:rgba(255,255,255,.01);"><td style="padding:7px 12px;color:var(--text2);">Kafta (Grilled BBQ)</td><td style="padding:7px 12px;color:var(--text);">Lean: 7–8 pieces + 1 cup hummus / Regular: 5 + ½ cup hummus</td><td style="padding:7px 12px;color:var(--text3);">3 bread</td></tr>
+            <tr style="border-bottom:1px solid rgba(30,45,74,.5);"><td style="padding:7px 12px;color:var(--text2);">Mixed Mashewe Lean</td><td style="padding:7px 12px;color:var(--text);">1 skewer Tawouk + 1 Lahme + 1 skewer / 2 Kafta + ½ cup hummus</td><td style="padding:7px 12px;color:var(--text3);">3 bread</td></tr>
+            <tr style="border-bottom:1px solid rgba(30,45,74,.5);background:rgba(255,255,255,.01);"><td style="padding:7px 12px;color:var(--text2);">Grilled Fish</td><td style="padding:7px 12px;color:var(--text);">3 fish fillet + ½ cup tahini sauce</td><td style="padding:7px 12px;color:var(--text3);">3 bread</td></tr>
+            <tr style="border-bottom:1px solid rgba(30,45,74,.5);"><td style="padding:7px 12px;color:var(--text2);">Homemade Burger</td><td style="padding:7px 12px;color:var(--text);">1½ burgers: 1 emptied bun + 1½ lean meat + 10 fries + 1 tsp diet mayo</td><td style="padding:7px 12px;color:var(--text3);">—</td></tr>
+            <tr style="border-bottom:1px solid rgba(30,45,74,.5);background:rgba(255,255,255,.01);"><td style="padding:7px 12px;color:var(--text2);">Omelette</td><td style="padding:7px 12px;color:var(--text);">5 eggs</td><td style="padding:7px 12px;color:var(--text3);">3 bread</td></tr>
+            <tr style="border-bottom:1px solid rgba(30,45,74,.5);"><td style="padding:7px 12px;color:var(--text2);">Shish Barak</td><td style="padding:7px 12px;color:var(--text);">20 small pieces + 3 cup cooked fat-free Laban</td><td style="padding:7px 12px;color:var(--text3);">—</td></tr>
+            <tr><td style="padding:7px 12px;color:var(--text2);">Kebbe Bel Saniyye (35cm / 8pcs)</td><td style="padding:7px 12px;color:var(--text);">2 pieces</td><td style="padding:7px 12px;color:var(--text3);">1 Laban</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- SECTION 7: ANTI-INFLAMMATORY DIET -->
+      <div class="dv-sub-title">🫐 Anti-Inflammatory Diet Notes (Mediterranean Approach)</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:8px;">
+        <div style="background:rgba(34,197,94,.05);border:1px solid rgba(34,197,94,.2);border-left:3px solid var(--green);padding:12px 16px;">
+          <div style="font-family:var(--fh);font-size:12px;color:var(--green);letter-spacing:1px;margin-bottom:8px;">✅ PROMOTE THESE (Anti-inflammatory)</div>
+          <div style="font-size:12px;color:var(--text2);line-height:1.9;">
+            · More plant-based: vegetables, fibers, fruits (berries), whole grains, beans, pulses<br>
+            · Omega-3 rich: Salmon, Avocado, Chia seeds, Flaxseeds, Walnuts, Olive Oil<br>
+            · Cook with Olive Oil<br>
+            · Beans 2–3×/week<br>
+            · Fish 2×/week (Salmon, Sardine, Trout)<br>
+            · Chicken 1 day/week<br>
+            · Red Meat max 1 day/week
+          </div>
+        </div>
+        <div style="background:rgba(239,68,68,.05);border:1px solid rgba(239,68,68,.2);border-left:3px solid var(--red);padding:12px 16px;">
+          <div style="font-family:var(--fh);font-size:12px;color:var(--red);letter-spacing:1px;margin-bottom:8px;">⚠ LIMIT THESE (Inflammatory)</div>
+          <div style="font-size:12px;color:var(--text2);line-height:1.9;">
+            · Simple sugars: white/brown sugar, molasse, syrup, honey, jam, excess fruit, sodas, juices, diet sodas<br>
+            · Saturated &amp; trans fats: fast food, junk food, dairy fats, butter<br>
+            · Processed foods: hotdogs, deli meats, sausages (charcuterie)<br>
+            · Alcohol · Smoking<br>
+            · Smoked foods
+          </div>
+        </div>
+      </div>
+      <div style="font-size:12px;color:var(--text3);padding:10px 14px;background:rgba(0,212,170,.04);border:1px solid rgba(0,212,170,.15);line-height:1.8;margin-top:8px;">
+        + Physical activity essential (swimming, cycling, walking in nature) · Manage stress · 7–8h quality sleep · Take supplements regularly · Medical checkups regularly
+      </div>
+
     </div>
   </div>
 </div>
@@ -886,6 +1233,74 @@
           <span class="fav-pill fp-teal">🧀 Cheese Rolls</span><span class="fav-pill fp-teal">🍫 Lotus Cream</span><span class="fav-pill fp-teal">🍰 Brownies</span><span class="fav-pill fp-teal">🎂 Cheesecake</span><span class="fav-pill fp-teal">🍩 Donuts</span><span class="fav-pill fp-teal">🍞 Pain au Lait</span><span class="fav-pill fp-teal">🥛 Protein Shake</span><span class="fav-pill fp-teal">🥜 Nuts</span><span class="fav-pill fp-teal">🫐 Rice Cakes</span>
         </div>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== FAVORITES ========== -->
+<div id="sec-favorites" class="section">
+  <div class="section-title">Food Preferences <span class="tag tag-green">STEVEN'S FAVORITES</span></div>
+  <div style="font-family:var(--fm);font-size:11px;color:var(--text3);margin-bottom:20px;padding:10px 16px;background:rgba(0,212,170,.04);border:1px solid rgba(0,212,170,.15);border-left:3px solid var(--teal);">Reference sheet for dietitian Jessica R. Attallah — foods Steven accepts and enjoys.</div>
+  <div class="fav-grid">
+    <div class="fav-card">
+      <div class="fav-card-hdr" style="border-left:3px solid var(--green);"><div class="fav-card-icon">🥦</div><div class="fav-card-title" style="color:var(--green);">Vegetables</div><span class="tag tag-green" style="margin-left:auto;">7</span></div>
+      <table class="fav-table">
+        <tr><td>🥒</td><td>Fresh Cucumber</td><td>raw · daily</td></tr>
+        <tr><td>🥬</td><td>Lettuce</td><td>salads</td></tr>
+        <tr><td>🧅</td><td>Red Onions</td><td>raw · tuna dishes</td></tr>
+        <tr><td>🌿</td><td>Green Onions</td><td>garnish</td></tr>
+        <tr><td>🥦</td><td>Cabbage</td><td>raw · cooked</td></tr>
+        <tr><td>🌱</td><td>Green Almonds</td><td>fresh seasonal</td></tr>
+        <tr><td>🫘</td><td>Fresh Fava Beans</td><td>seasonal · فول أخضر</td></tr>
+      </table>
+      <div class="fav-note">Prefers vegetables raw. Cucumber appears most frequently in the diet log.</div>
+    </div>
+    <div class="fav-card">
+      <div class="fav-card-hdr" style="border-left:3px solid var(--amber);"><div class="fav-card-icon">🍎</div><div class="fav-card-title" style="color:var(--amber);">Fruits</div><span class="tag tag-amber" style="margin-left:auto;">5</span></div>
+      <table class="fav-table">
+        <tr><td>🥑</td><td>Avocado</td><td>high-fat · calorie dense</td></tr>
+        <tr><td>🍏</td><td>Green Apple</td><td>raw · snack</td></tr>
+        <tr><td>🍍</td><td>Pineapple</td><td>fresh / canned</td></tr>
+        <tr><td>🥭</td><td>Mango</td><td>fresh · smoothie</td></tr>
+        <tr><td>🍌</td><td>Banana</td><td>snack · shake base</td></tr>
+      </table>
+      <div class="fav-note">Avocado and banana are excellent calorie-dense additions for weight gain goals.</div>
+    </div>
+    <div class="fav-card">
+      <div class="fav-card-hdr" style="border-left:3px solid var(--orange);"><div class="fav-card-icon">🍽️</div><div class="fav-card-title" style="color:var(--orange);">Favorite Dishes</div><span class="tag tag-amber" style="margin-left:auto;">5</span></div>
+      <table class="fav-table">
+        <tr><td>🍔</td><td>Burgers</td><td>very frequent</td></tr>
+        <tr><td>🥩</td><td>Kibbeh Nayyeh</td><td>Lebanese raw beef</td></tr>
+        <tr><td>🧀</td><td>Mac &amp; Cheese</td><td>frequent comfort meal</td></tr>
+        <tr><td>🍟</td><td>French Fries</td><td>daily staple</td></tr>
+        <tr><td>🍗</td><td>Fried Chicken</td><td>sandwiches · frequent</td></tr>
+      </table>
+      <div class="fav-note">Burgers &amp; fries dominate the log. Mac &amp; Cheese is a preferred home-cooked option.</div>
+    </div>
+    <div class="fav-card">
+      <div class="fav-card-hdr" style="border-left:3px solid var(--cyan);"><div class="fav-card-icon">💪</div><div class="fav-card-title" style="color:var(--cyan);">Protein Sources</div><span class="tag tag-blue" style="margin-left:auto;">4</span></div>
+      <table class="fav-table">
+        <tr><td>🦐</td><td>Shrimp</td><td>high protein</td></tr>
+        <tr><td>🐟</td><td>Tuna</td><td>canned · very frequent</td></tr>
+        <tr><td>🍗</td><td>Chicken Breast</td><td>grilled · baked</td></tr>
+        <tr><td>🥩</td><td>Lean Beef</td><td>beuftek · kibbeh</td></tr>
+      </table>
+      <div class="fav-note">Tuna (canned with red onions) is Steven's most consistent protein source.</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">🍫 Frequent Snacks</div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:4px;">
+      <span style="font-family:var(--fm);font-size:11px;padding:5px 12px;background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.25);color:var(--amber);">🧀 Cheese Rolls</span>
+      <span style="font-family:var(--fm);font-size:11px;padding:5px 12px;background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.25);color:var(--amber);">🍫 Lotus Cream</span>
+      <span style="font-family:var(--fm);font-size:11px;padding:5px 12px;background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.25);color:var(--amber);">🍰 Brownies</span>
+      <span style="font-family:var(--fm);font-size:11px;padding:5px 12px;background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.25);color:var(--amber);">🎂 Cheesecake</span>
+      <span style="font-family:var(--fm);font-size:11px;padding:5px 12px;background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.25);color:var(--amber);">🍩 Donuts</span>
+      <span style="font-family:var(--fm);font-size:11px;padding:5px 12px;background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.25);color:var(--amber);">🍞 Pain au Lait</span>
+      <span style="font-family:var(--fm);font-size:11px;padding:5px 12px;background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.25);color:var(--amber);">🥛 Protein Shake</span>
+      <span style="font-family:var(--fm);font-size:11px;padding:5px 12px;background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.25);color:var(--amber);">🍰 Pop Cakes</span>
+      <span style="font-family:var(--fm);font-size:11px;padding:5px 12px;background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.25);color:var(--amber);">🥜 Nuts</span>
+      <span style="font-family:var(--fm);font-size:11px;padding:5px 12px;background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.25);color:var(--amber);">🫐 Rice Cakes</span>
     </div>
   </div>
 </div>
